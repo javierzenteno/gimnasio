@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_torneo" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a2b0d140-ccce-4cdf-989f-83c166e5d2f0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codtor" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select torneo.codtor,nomtor,fector,destor,esttor,codmod,codgen,jugador.codjug,postor,concat(nomper,' ',priapper,' ',segapper)jugador from torneo
+join torjug on torjug.codtor=torneo.codtor
+join jugador on jugador.codjug=torjug.codjug
+join persona on persona.codper=jugador.codper
+where torneo.codtor=$P{codtor}]]>
+	</queryString>
+	<field name="codtor" class="java.lang.Long">
+		<fieldDescription><![CDATA[codigo de torneo]]></fieldDescription>
+	</field>
+	<field name="nomtor" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre de torneo]]></fieldDescription>
+	</field>
+	<field name="fector" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[fecha del torneo]]></fieldDescription>
+	</field>
+	<field name="destor" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcion del torneo]]></fieldDescription>
+	</field>
+	<field name="esttor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[estado del torneo 1=creado,2=en juego,3=finalizado]]></fieldDescription>
+	</field>
+	<field name="codmod" class="java.lang.Integer">
+		<fieldDescription><![CDATA[codigo modalidad]]></fieldDescription>
+	</field>
+	<field name="codgen" class="java.lang.Integer">
+		<fieldDescription><![CDATA[codigo general]]></fieldDescription>
+	</field>
+	<field name="codjug" class="java.lang.Integer">
+		<fieldDescription><![CDATA[codigo de jugador]]></fieldDescription>
+	</field>
+	<field name="postor" class="java.lang.Integer">
+		<fieldDescription><![CDATA[posicion de jugador en el torneo]]></fieldDescription>
+	</field>
+	<field name="jugador" class="java.lang.String"/>
+	<variable name="nombre" class="java.lang.String">
+		<variableExpression><![CDATA[($F{codmod}==2)?"TORNEO":"LIGA"]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="572" height="31" uuid="d79143e4-3a9e-41cd-add8-579d4de91a3f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RANKING DEPARTAMENTAL]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="360" y="5" width="63" height="20" isPrintInFirstWholeBand="true" uuid="76621e6e-b99c-41aa-a628-9e4dd0e4e08a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[POSICIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="143" y="5" width="206" height="20" isPrintInFirstWholeBand="true" uuid="3b27bb5a-5b61-41e9-ad73-0a912d4f664a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUGADOR]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="143" y="0" width="206" height="20" uuid="380946b0-0788-44ca-b221-31fdc9e44ffd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jugador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="0" width="63" height="20" uuid="259666e6-7e7c-4932-8804-af0bd9942bda"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{postor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="425" y="0" width="147" height="20" uuid="0df141fd-4873-4be5-8c09-b0982cac774c"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

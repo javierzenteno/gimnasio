@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_categoria" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6f97855d-fb8a-4de0-8dd3-dd93b99cdcb5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="edad" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="edad2" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT jugador.codjug,acropro,concat(nomper,' ',priapper,' ',segapper) as jugador,año_obtener(codjug) as edad,concat(madera,' ',gomad,' ',gomar) as material from jugador
+join persona on persona.codper=jugador.codper
+join provincia on provincia.codpro=jugador.codpro
+where ((cast(left(cast(now() as text),4) as integer))-(cast(left(cast(fecnacper as text),4) as integer))<=$P{edad}) and ((cast(left(cast(now() as text),4) as integer))-(cast(left(cast(fecnacper as text),4) as integer))>=($P{edad2})) and codjug>0 order by edad;]]>
+	</queryString>
+	<field name="codjug" class="java.lang.Integer">
+		<fieldDescription><![CDATA[codigo de jugador]]></fieldDescription>
+	</field>
+	<field name="acropro" class="java.lang.String">
+		<fieldDescription><![CDATA[acronimo de la asociación municipal]]></fieldDescription>
+	</field>
+	<field name="jugador" class="java.lang.String"/>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="material" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="71" splitType="Stretch">
+			<staticText>
+				<reportElement x="110" y="32" width="535" height="39" uuid="015f88e7-8e04-4b24-b622-2d9b2cfc250d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE JUGADORES POR CATEGORIA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="11" width="63" height="20" isPrintInFirstWholeBand="true" uuid="3691404f-fe3c-41c2-98e8-e72b67ea547d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="11" width="206" height="20" isPrintInFirstWholeBand="true" uuid="aa85c75d-b20b-4169-b6f6-26d44594c43b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUGADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="11" width="55" height="20" isPrintInFirstWholeBand="true" uuid="520eced7-461f-42a8-966b-bc256c8a97d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="11" width="327" height="20" isPrintInFirstWholeBand="true" uuid="6c0f196f-3acb-426c-98ca-ebfefab7f044"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="11" width="101" height="20" isPrintInFirstWholeBand="true" uuid="8a9f9cbe-a00e-41d2-b40a-844668e7a9a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROVINCIA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="63" height="20" uuid="2a8bfb97-234c-47eb-8a4b-4073c734518f"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codjug}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="63" y="0" width="206" height="20" uuid="bf4c44c2-50ce-44f0-9495-109ccffbe021"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jugador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="0" width="101" height="20" uuid="2c30e847-04da-459b-9198-c1e8e5b29e3d"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acropro}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="55" height="20" uuid="de8c6808-2890-47f3-a6b7-13e4d26960af"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="425" y="0" width="327" height="20" uuid="feb74f24-1050-4bd6-aba4-ed915fa3ce03"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{material}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="605" y="0" width="147" height="20" uuid="1ba3b5db-803e-4b2b-81a7-6f44699e2dea"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

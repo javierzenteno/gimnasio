@@ -1,0 +1,420 @@
+<form name="formulario" role="form" id="formulario" method="post" action="../egreso/guardar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" 
+	data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">                       
+<div class="modal modal-primary fade" id="modalAdicionar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Adicionar Nuevo Egreso</h4>
+      </div>
+      	<div class="modal-body">
+             <div class="row">
+             <div class="">
+             	<div class="col-lg-6">
+             	<div class="form-group">
+                 <label>Realizo el Pago</label>
+                 <input type="text" class="form-control" id="pago" name="pago" data-fv-notempty="true" placeholder="ingrese nombres">
+                 
+               	</div>
+               	</div>
+               	<div class="col-lg-6">
+               	<div class="form-group">
+                 <label>A Quien se Pago</label>
+                 <input type="text" class="form-control" id="aquien" name="aquien" data-fv-notempty="true" placeholder="ingrese nombres">
+                 
+               	</div>
+               	</div>
+             </div>
+             <div class="col-lg-12">
+             	<div class="form-group">
+                 <label>Monto</label>
+                 <input type="text" class="form-control" id="monto" name="monto" data-fv-notempty="true" data-fv-numeric="true" data-fv-numeric-decimalseparator="." data-fv-greaterthan="true" data-fv-greaterthan-value="1" placeholder="ingrese monto mayor a 0">
+                 <input type="hidden" id="codper" name="codper" value="$codper">
+               	</div>
+             </div>
+             <div class="col-lg-12">
+             <div class="form-group">
+                 <label>Concepto del Egreso</label>
+                 <textarea class="form-control" id="desegr" name="desegr" data-fv-notempty="true" data-fv-stringlength="true" data-fv-stringlength-max="150"></textarea>
+             </div>
+             </div>
+             </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnAdicionarConfirmacion" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal modal-primary fade" id="modalAdicionarConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de Confirmación</h4>
+      </div>
+      <div class="modal-body">
+      			<label>Esta seguro de adicionar a este egreso?</label>
+			</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<form name="formularioModificar" role="form" id="formularioModificar" method="post" action="../egreso/actualizar" data-fv-excluded="disabled"
+	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+<div class="modal modal-primary fade" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog"role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modificar Egreso</h4>
+      </div>
+	<div class="modal-body">
+		<input  type="hidden" name="codegr" id="codegr" />
+		     <div class="row">
+             <div class="">
+             	<div class="col-lg-6">
+             	<div class="form-group">
+                 <label>Realizo el Pago</label>
+                 <input type="text" class="form-control" id="pago" name="pago" data-fv-notempty="true">
+                 <input type="hidden" id="codper" name="codper" value="$codper">
+               	</div>
+               	</div>
+               	<div class="col-lg-6">
+               	<div class="form-group">
+                 <label>A Quien se Pago</label>
+                 <input type="text" class="form-control" id="aquien" name="aquien" data-fv-notempty="true">
+               	</div>
+               	</div>
+             </div>
+             <div class="col-lg-12">
+             	<div class="form-group">
+                 <label>Monto</label>
+                 <input type="text" class="form-control" id="monto1" name="monto" data-fv-notempty="true" data-fv-numeric="true" data-fv-numeric-decimalseparator="." data-fv-greaterthan="true" data-fv-greaterthan-value="1">
+                 <input type="hidden" id="mon1">
+               	</div>
+             </div>
+             <div class="col-lg-12">
+             <div class="form-group">
+                 <label>Concepto del Egreso</label>
+                 <textarea class="form-control" id="desegr" name="desegr" data-fv-notempty="true" data-fv-stringlength="true" data-fv-stringlength-max="150"></textarea>
+             </div>
+             </div>
+             </div>
+            
+   </div>
+	<div class="modal-footer">
+        <button type="button" id="btnModificarConfirmacion" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-primary fade" id="modalModificarConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm"  role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de Confirmación</h4>
+      </div>
+      <div class="modal-body">
+      			<label>Esta seguro de modificar a este egreso?</label>
+			</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+</div>
+ </form>
+<div class="modal modal-primary fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../egreso/eliminar" data-fv-excluded="disabled"
+	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar Egreso</h4>
+      </div>
+      <div class="modal-body">
+   			<input  type="hidden" id="codegr" name="codegr" />	
+   			<div class="row">
+   				<div class="col-md-9"><h3>Esta seguro que desea eliminar el Egreso <b id="documentoLabel"></b></h3></div>
+   			</div>		
+	</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+
+<div class="modal modal-primary fade" id="modalHabilitar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<form name="formularioHabilitar" role="form" id="formularioHabilitar" method="post" action="../egreso/activar" data-fv-excluded="disabled"
+	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Habilitar Egreso</h4>
+      </div>
+      <div class="modal-body">
+   			<input  type="hidden" id="codegr" name="codegr" />	
+   			<div class="row">
+   				<div class="col-md-9"><h3>Esta seguro que desea habilitar el Egreso <b id="documento1Label"></b></h3></div>
+   			</div>		
+	</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel" >
+			<div class="panel-heading"><h2 class="page-header" align="center">Gestión Egreso</h2>
+				<div class="row">
+					<div class="col-md-2">
+			            <div class="form-group">
+			            <label>Fecha</label>
+			            <div class="input-group">
+			            <input type="text" class="form-control" id="fecegr" name="fecegr" data-fv-notempty="true" placeholder="dd/mm/yyyy">
+			            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			            </div>
+			            </div>
+			        </div>
+					<input type="hidden" id="general" value="$general">
+					<div class="col-md-4">
+						<div class="btn-group">
+							<label class="btn btn-success estado"> <input  type="radio" name="estegr" value="true" checked><i class="entypo-thumbs-up"></i> Activos</label> 
+							<label class="btn btn-danger estado"> <input  type="radio" name="estegr" value="false"><i class="entypo-thumbs-down"></i> Bajas</label>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<label style="">Monto en Caja : <h1 id="ca">$caja.round</h1> </label>
+					</div>
+					<div class="col-md-2">
+						<button style="text-align: right" class="btn btn-success" id="btnAdicionar">
+						<i class="fa fa-plus-square"></i> Nuevo Egreso</button>
+					</div>
+					<input id="montocaja" type="hidden" value="$caja.round">
+				</div>
+			</div>
+			<div class="panel-body" >
+				<div class="dataTable_wrapper table-responsive">
+					<table id="example" class="table table-bordered table-hover">
+                        <thead>
+                        <tr style="font-size: 10px;top: 10%;">
+                        	<th width="30%">Concepto</th>
+                        	<th width="10%">Fecha</th>
+                        	<th width="5%">Monto</th>
+                        	<th width="10%">Realizó el Pago</th>
+                        	<th width="10%">A Quien se realizó el Pago</th>
+                        	<th width="10%">Usuario de Registro</th>
+                        	<th width="10%">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody style="font-size: 12px">
+                        	
+                        </tbody>
+					</table>  
+				</div>
+			</div>
+		</div>
+	</div>
+</div> 
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                        	$('select').chosen({
+                        		no_results_text: "No se encuentra:",width:'100%'
+                        		});
+                        	$('#fecegr').datetimepicker({
+                         		 format: 'DD/MM/YYYY'
+                              });
+                           	$('#btnAdicionar').click(function(){
+                        		$('#formulario').data('formValidation').resetForm();
+                        		$('#formulario')[0].reset();
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionar').modal('show');
+                        	});
+                        	$('#btnAdicionarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionarConfirmacion').modal('show');
+                        	});
+                        	$('#btnModificarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalModificarConfirmacion').modal('show');
+                        	});
+                        	$('#example').dataTable( {
+                        		"dom":"f<button> ip",
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../egreso/lista",
+                      	        	"data": function ( d ) {
+                      	                d.estado = $('input[name=estegr]:checked').val();
+                      	                d.fecegr = $('#fecegr').val();
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "codegr" },
+                      		                { "data": "codegr" },
+                      		                { "data": "codegr" },
+                      		              	{ "data": "codegr" },
+                    		                { "data": "codegr" },
+                    		                { "data": "codegr" },
+                      		              	{ "data": "codegr" }
+                      		                                  		    ],
+                      		    "createdRow": function ( row, data, index ){
+                      		    	$('td',row).eq(0).html(data.desegr);
+                      		    	$('td',row).eq(1).html(data.fecha);
+                      		    	$('td',row).eq(2).html(data.monto+" Bs.");
+                      		    	$('td',row).eq(3).html(data.pago);
+                      		    	$('td',row).eq(4).html(data.aquien);
+                      		    	$('td',row).eq(5).html(data.usuario);
+                      		    	if(data.gen==$('#general').val()){
+                      		    	if(data.estegr==true){
+                       		    		$('td', row).eq(6).html('<div class="btn-group"><button class="modificar btn btn-info btn-sm"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="'+data.codegr+'"><i class="entypo-pencil"></i></button><button class="eliminar btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="'+data.codegr+'"><i class="entypo-trash"></i></button></div>');
+                       		    	}else{
+                       					$('td', row).eq(6).html('<button class="habilitar btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="Habilitar" data-id="'+data.codegr+'"><i class="entypo-ccw"></i></button>');
+                       				}
+                      		    	}else{
+                      		    		$('td', row).eq(6).html('');
+                      		    	}
+                      	        },
+                      	        "drawCallback": function( settings ) {	
+                              		$('.modificar').click(function(){ 
+                              			$('#formularioModificar').data('formValidation').resetForm();
+                                		$('#formularioModificar')[0].reset();
+                                		document.getElementById("body").removeAttribute("style");
+                                  		$.post('../egreso/obtener?codegr='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalModificar').modal('show');
+                      							$('#formularioModificar').loadJSON(result.data);
+                      							$('#mon1').val(result.data.monto);
+                      							$('#monto1').val(result.data.monto);
+                      							document.getElementById("body").removeAttribute("style");
+                      		            	}else{
+                      		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.eliminar').click(function(){ 
+                              			$('#formularioEliminar').data('formValidation').resetForm();
+                                		$('#formularioEliminar')[0].reset();
+                                  		$.post('../egreso/obtener?codegr='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalEliminar').modal('show');
+                      							$('#formularioEliminar').loadJSON(result.data);
+                      							$('#documentoLabel').html(result.data.desegr);
+                      		            	}else{
+                      		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.habilitar').click(function(){ 
+                              			$('#formularioHabilitar').data('formValidation').resetForm();
+                                		$('#formularioHabilitar')[0].reset();
+                                  		$.post('../egreso/obtener?codegr='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalHabilitar').modal('show');
+                      							$('#formularioHabilitar').loadJSON(result.data);
+                      							$('#documento1Label').html(result.data.desegr);
+                      		            	}else{
+                      		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.ver').click(function(){ 
+                              			$("#frameReportes").attr("src",'../egreso/ver?codegr='+$(this).data('id'));
+                              			$("#reportes").modal('show');
+                              		});
+                              		$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                              		
+                      	        }
+                        } );
+                        $('.estado').click(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        $('#fecegr').datetimepicker().blur(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        $('#monto').keyup(function(){
+                        	var a=$('#montocaja').val();
+                        	var x=a.split(" ");
+                        	a=parseFloat(x[0]);
+                        	var c=a-parseFloat($(this).val());
+                        	if(c<0){
+                        		$('#monto').val('');
+                        		mostrarMensaje('error','Monto mayor al existente');
+                        	}
+                        });
+                        $('#monto1').keyup(function(){
+                        	var a=$('#montocaja').val();
+                        	var x=a.split(" ");
+                        	a=parseFloat(x[0]);
+                        	var b=$('#mon1').val();
+                        	b=parseFloat(b);
+                        	var c=a+b;
+                        	c=parseFloat(c);
+                        	cc=c-parseFloat($(this).val());
+                        	console.log(cc);
+                        	if(cc<0){
+                        		$('#monto1').val('');
+                        		mostrarMensaje('error','Monto mayor al existente');
+                        	}
+                        });
+                        function ir_pagina(dir){
+            				$('#contenedor').fadeOut(200,function(){
+            					$('#contendeor').load(dir,function(){
+            						$('#contenedor').fadeIn(200);
+            					});
+            				});
+            			}
+                        $('#formulario,#formularioModificar,#formularioEliminar,#formularioHabilitar').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status){
+                      	            $form.data('formValidation').resetForm();
+                      	          	$('#formulario')[0].reset();
+                      	        	$('#formularioModificar')[0].reset();
+                      	            $('#formularioEliminar')[0].reset();
+                      	          	$('#formularioHabilitar')[0].reset();
+									$('#example').dataTable().fnDraw('page');
+									$('#body').css('padding-right','-17px');
+									mostrarMensaje('success','Se realizo con exito el Proceso');
+									$.post('../egreso/caja', function(result) {
+		          		            	if(result.status){
+		          		            		$('#ca').html(result.data.round);
+		          		            		$('#montocaja').val(result.data.round);
+		          						}else{
+		          		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+		          		            	}
+		          			        }, 'json');
+                      	        }else{
+                              		mostrarMensaje('error','No se realizo con exito el Proceso');
+                              	}
+                              	$('.modal').modal('hide');
+                      	    }, 'json');
+                          });
+                        });
+                        </script>
+                

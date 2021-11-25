@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="tipo_contenido" http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Sistema ADTMT</title>
+<meta
+	content="width=device-width, initial-scale=1"
+	name="viewport">
+<!-- Bootstrap 3.3.5 -->
+<link rel="stylesheet" href="../../css/bootstrap.min.css">
+<!--     date-picker -->
+<link href="../../css/bootstrap-datetimepicker.css" rel="stylesheet">
+<!-- Bootstrap validation CSS -->
+<link href="../../css/formValidation.min.css" rel="stylesheet">
+<!--     libreria para subir imagenes -->
+<link href="../../css/fileinput.css" rel="stylesheet" type="text/css">
+<!-- 	notificaciones -->
+<link rel="stylesheet" href="../../css/toastr.min.css">
+<!-- 	chosen select -->
+<link rel="stylesheet" href="../../css/chosen.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="../../css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet" href="../../css/ionicons.min.css">
+<!-- DataTables -->
+
+<link rel="stylesheet" href="../../css/dataTables.bootstrap.css">
+<link rel="stylesheet" href="../../css/buttons.dataTables.css">
+<link rel="stylesheet" href="../../css/buttons.bootstrap.css">
+<link rel="stylesheet" href="../../css/bootstrap-duallistbox.css">
+<!--     calendario -->
+<link rel="stylesheet" href="../../css/fullcalendar.min.css">
+<link rel="stylesheet" href="../../css/fullcalendar.print.css" media="print">
+<!-- Theme style -->
+<link rel="stylesheet" href="../../css/AdminLTE.css">
+<link rel="stylesheet" href="../../css/_all-skins.css">
+<link rel="stylesheet" href="../../css/entypo.css">
+<!-- iCheck -->
+<link rel="stylesheet" href="../../css/blue.css">
+<!-- Morris chart -->
+<link rel="stylesheet" href="../../css/morris.css">
+<!-- jvectormap -->
+<link rel="stylesheet" href="../../css/jquery-jvectormap-1.2.2.css">
+<!-- Date Picker -->
+<link rel="stylesheet" href="../../css/datepicker3.css">
+<!-- Daterange picker -->
+<link rel="stylesheet" href="../../css/daterangepicker-bs3.css">
+<!-- bootstrap wysihtml5 - text editor -->
+<link rel="stylesheet" href="../../css/bootstrap3-wysihtml5.css">
+<!--     Iconos -->
+
+</head>
+<body id="body" class="skin-custom hold-transition sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+
+		<header class="main-header">
+			<!-- Logo -->
+			<a  class="logo hidden-xs"> <!-- mini logo for sidebar mini 50x50 pixels -->
+				<span class="logo-lg"></span>
+			</a>
+			<!-- Header Navbar: style can be found in header.less -->
+			<nav class="navbar navbar-static-top" role="navigation">
+				<!-- Sidebar toggle button-->
+				<a  class="sidebar-toggle" data-toggle="offcanvas"
+					role="button"> 
+				</a>
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<li>
+							<div class="col-xl-4">
+							<label style="color: white;""></label>
+							Rol<select id="role" name="role" data-placeholder="Roles">
+								#foreach($r in $rol)
+								<option #if($xrol==$r.codrol) selected #end  value="$r.codrol">$r.nomrol</option>
+								#end
+							</select>
+							</div>
+						</li>	
+						<!-- User Account: style can be found in dropdown.less -->
+						<li class="dropdown user user-menu"><a href="#"	class="dropdown-toggle" data-toggle="dropdown">
+								<i class="entypo-logout"></i>
+								<span id="nameUser2" class="hidden-xs">$user.nomper $user.priapper $!{user.segapper}</span>
+						</a>
+							<ul class="dropdown-menu">
+								<!-- User image -->
+								<li class="user-header">
+									<div class="small-box">
+										<div class="inner">
+										<h3 style="color: white;">Usuario:</h3>
+										<p style="color: white;">$user.nomper $user.priapper $!{user.segapper}</p>
+										</div>
+										<div class="icon">
+										<i class="entypo-user"></i>
+										</div>
+									</div>
+									<div class="pull-center">
+										<a href="../principal/salir" class="btn btn-primary">Cerrar
+											Sesión</a>
+									</div>
+									</li>
+
+								<!-- Menu Footer-->
+								<!-- <li class="user-footer">
+									<div class="pull-left">
+										<button class="btn btn-success btn-flat" id="asignar">Cambiar
+											Clave</button>
+									</div>
+									
+								</li> -->
+							</ul></li>
+						<!-- Control Sidebar Toggle Button -->
+						
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<!-- =============================================== -->
+
+		<!-- Left side column. contains the sidebar -->
+		<aside class="main-sidebar">
+			<!-- sidebar: style can be found in sidebar.less -->
+			<section class="sidebar">
+				<!-- Sidebar user panel -->
+				<div class="user-panel">
+					<div class="pull-left image">
+						<img src="../../img/$gestion.loggen"
+							class="img-circle" alt="User Image">
+					</div>
+					<div class="pull-left info">
+						<h4>Menú Principal</h4>
+					</div>
+				</div>
+
+				<!-- sidebar menu: : style can be found in sidebar.less -->
+				<ul class="sidebar-menu">
+					<!-- <li class="header">
+						<h4><i class="fa fa-tasks"></i> </h4>
+					</li> -->
+					#foreach($menu in $menus)
+						<li class="treeview">
+							<a href="#"> 
+								<i class="$menu.icomen"></i>
+								<span>$menu.nommen </span> 
+								<i class="entypo-left-open pull-right"></i>
+							</a> 
+							#if($menu.procesos.size()>0)
+							<ul class="treeview-menu">
+								#foreach($proceso in $menu.procesos)
+								<li>
+									<a href="#" data-href="$proceso.urlpro" class="enlace">
+									$proceso.nompro</a>
+								</li>
+								#end
+							</ul>
+							#end
+						</li>#end
+				</ul>
+			</section>
+			<!-- /.sidebar -->
+		</aside>
+
+		<!-- =============================================== -->
+
+		<!-- Content Wrapper. Contains page content PAGINA PRINCIPAL -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					<i class="entypo-newspaper"></i>$gestion.nomgen
+				</h1>
+				<ol class="breadcrumb">
+					<li><i class="fa  fa-calendar-check-o"></i><b id="fecha"></b></li>
+
+				</ol>
+			</section>
+
+			<!-- Main content -->
+			<section class="content" id="contenedor">
+
+				<!-- Default box -->
+				<div class="box" align="center">
+					<div class="box-body">
+						<img class="img img-thumbnail" src="../../img/picture1large.jpg"
+							width="1200px">
+					</div>
+					<!-- /.box-body -->
+
+				</div>
+				<!-- /.box -->
+
+			</section>
+			<div class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="reportes" aria-hidden="true">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						</div>
+						<div class="modal-body">
+							<iframe id="frameReportes" width="100%" height="500px"></iframe>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+
+		<footer class="main-footer hidden-xs">
+			<div class="pull-right hidden-xs">
+				<b>Version</b> 1.0
+			</div>
+			<strong>Sitio desarrollado por el universitario Javier Renan Zenteno Cruz y la Universidad Autónoma Juan Misael Saracho
+			</strong>
+		</footer>
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
+	<!-- jQuery 2.1.4 -->
+	<script src="../../js/jquery.min.js"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script src="../../js/jquery-ui.min.js"></script>
+	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+	<script>
+      $.widget.bridge('uibutton', $.ui.button);
+    </script>
+	<!-- Bootstrap 3.3.5 -->
+	<script src="../../js/bootstrap.min.js"></script>
+	<!-- DataTables -->
+	<script src="../../js/jquery.dataTables.js"></script>
+	<script src="../../js/dataTables.bootstrap.js"></script>
+	<script src="../../js/dataTables.buttons.js"></script>
+	<script src="../../js/buttons.bootstrap.js"></script>
+	<script src="../../js/jquery.bootstrap-duallistbox.js"></script>
+	<!--      JSON -->
+	<script type="text/javascript" src="../../js/jquery.loadJSON.js"></script>
+
+	<!-- Bootstrap Validation JavaScript -->
+	<script src="../../js/formValidation.js"></script>
+	<script src="../../js/framework/bootstrap.min.js"></script>
+	<script src="../../js/es_ES.js"></script>
+
+	<!-- 	chosen select -->
+	<script src="../../js/chosen.js"></script>
+	<!-- 	file input - para subir imagenes -->
+
+	<!-- 	notificaciones -->
+	<script src="../../js/toastr.js"></script>
+	<!-- Morris.js charts -->
+	<script src="../../js/raphael-min.js"></script>
+	<script src="../../js/morris.js"></script>
+	<!-- Sparkline -->
+	<script src="../../js/jquery.sparkline.js"></script>
+	<!-- jvectormap -->
+	<script src="../../js/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="../../js/jquery-jvectormap-world-mill-en.js"></script>
+	<!-- jQuery Knob Chart -->
+	<script src="../../js/jquery.knob.js"></script>
+	<!-- daterangepicker -->
+	<script src="../../js/moment.js"></script>
+	<script src="../../js/daterangepicker.js"></script>
+	<!-- datepicker -->
+	<script src="../../js/bootstrap-datetimepicker.js"></script>
+	<!-- Bootstrap WYSIHTML5 -->
+	<!--     <script src="../../js/bootstrap3-wysihtml5.all.js"></script> -->
+	<!-- Slimscroll -->
+	<script src="../../js/jquery.slimscroll.js"></script>
+	<!-- FastClick -->
+	<script src="../../js/fastclick.js"></script>
+	<!-- AdminLTE App -->
+	<script src="../../js/app.js"></script>
+	<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+	<!--     <script src="../../js/dashboard.js"></script> -->
+	<script src="../../js/Chart.js"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="../../js/demo.js"></script>
+	<script src="../../js/bootstrap-datetimepicker.js"></script>
+	<script src="../../js/es.js"></script>
+
+	<script src="../../js/jquery.inputmask.js"></script>
+	<script src="../../js/jquery.inputmask.date.extensions.js"></script>
+	<script src="../../js/jquery.inputmask.extensions.js"></script>
+	<script src="../../js/fullcalendar.min.js"></script>
+	<script src="../../js/es_calendar.js"></script>
+
+	<script type="text/javascript">
+	function mostrarMensaje(tipo,msg){
+		var opts = {
+				"closeButton": true,
+			  "debug": true,
+			  "newestOnTop": true,
+			  "progressBar": true,
+			  "positionClass": "toast-bottom-right",
+			  "preventDuplicates": false,
+			  "showDuration": "300",
+			  "hideDuration": "1000",
+			  "timeOut": "5000",
+			  "extendedTimeOut": "1000",
+			  "showEasing": "swing",
+			  "hideEasing": "linear",
+			  "showMethod": "fadeIn",
+			  "hideMethod": "fadeOut",
+			  "toastClass": tipo,
+		};
+		if(tipo=='success'){
+			toastr.success(msg, "Sistema ADTMT", opts);
+		}else if(tipo=='error'){
+			toastr.error(msg, "Sistema ADTMT", opts);
+		}else if(tipo=='info'){
+			toastr.info(msg, "Sistema ADTMT", opts);
+		}else if(tipo=='warning'){
+			toastr.warning(msg, "Sistema ADTMT", opts);
+		}
+	}
+	function ir_pagina(dir){
+		$('#contenedor').html(dir);
+	}
+	$('#role').change(function(){
+		window.location="acceder?xrol="+$(this).val();
+	});
+		var ahora = new Date();
+		var dias = new Array("Domingo", "Lunes", "Martes", "Miércoles", "Jueves","Viernes", "Sabado");
+		var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo","Junio", "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+		var hoy=dias[ahora.getDay()]+', '+ahora.getDate()+' de '+meses[(ahora.getMonth())]+' del '+ahora.getFullYear();	
+		$('#fecha').html('Fecha : '+hoy);
+		
+		$(document).ready(function(){
+			mostrarMensaje('success','Bienvenido al Sistema');
+			$('.tooltip').tooltip();
+			$(".enlace").click(function(){
+				$.post($(this).data("href"), function(resp) {
+    			$("#contenedor").html(resp);
+	    	});
+			});
+			
+			$('select').chosen({no_results_text: "No se encuentra:",width:'100%'});	
+			$('#asignar').click(function(){ 
+      			$('#formularioAsignar').data('formValidation').resetForm();
+      			$('#formularioAsignar')[0].reset();
+          		$.post('../usuario/obtener?ci=$user.ci', function(result) {
+		            	if(result.status==true){
+		            		$('#modalAsignar').modal('show');
+							if(result.data!=null)$('#formularioAsignar').loadJSON(result.data);
+							if(result.datos!=null){
+								$('#formularioAsignar').loadJSON(result.datos);
+								$('#claveAnterior').show(500);
+							}else
+								$('#claveAnterior').hide(500);
+							$('#usuarioLabel3').html(result.data.nom_per+' '+result.data.priape_per+' '+result.data.segape_per);
+		            	}else{
+		            		mostrarMensaje('error','No se realizo con exito la Transacción');
+		            	}
+			        }, 'json');
+      		});
+			
+			$('#formularioAsignar').formValidation(
+					{
+						fields: {
+							cla1: {
+			                    validators: {
+			                        notEmpty: {
+			                            message: 'El password es requerido'
+			                        },
+			                        callback: {
+			                            callback: function(value, validator, $field) {
+			                                var score = 0;
+
+			                                if (value === '') {
+			                                    return {
+			                                        valid: true,
+			                                        score: null
+			                                    };
+			                                }
+
+			                                // Check the password strength
+			                                score += ((value.length >= 8) ? 1 : -1);
+
+			                                // The password contains uppercase character
+			                                if (/[A-Z]/.test(value)) {
+			                                    score += 1;
+			                                }
+
+			                                // The password contains uppercase character
+			                                if (/[a-z]/.test(value)) {
+			                                    score += 1;
+			                                }
+
+			                                // The password contains number
+			                                if (/[0-9]/.test(value)) {
+			                                    score += 1;
+			                                }
+
+			                                // The password contains special characters
+			                                if (/[!#$%&^~*_]/.test(value)) {
+			                                    score += 1;
+			                                }
+
+			                                return {
+			                                    valid: true,
+			                                    score: score    // We will get the score later
+			                                };
+			                            }
+			                        }
+			                    }
+			                }
+			            }
+				    }		
+			
+			).on('success.validator.fv', function(e, data) {
+	            // The password passes the callback validator
+	            if (data.field === 'cla1' && data.validator === 'callback') {
+	                // Get the score
+	                var score = data.result.score,
+	                    $bar  = $('#passwordMeter').find('.progress-bar');
+
+	                switch (true) {
+	                    case (score === null):
+	                        $bar.html('').css('width', '0%').removeClass().addClass('progress-bar');
+	                        break;
+	                    case (score <= 0):
+	                        $bar.html('Muy Debil').css('width', '25%').removeClass().addClass('progress-bar progress-bar-danger');
+	                        break;
+
+	                    case (score > 0 && score <= 2):
+	                        $bar.html('Debil').css('width', '50%').removeClass().addClass('progress-bar progress-bar-warning');
+	                        break;
+
+	                    case (score > 2 && score <= 4):
+	                        $bar.html('Medio').css('width', '75%').removeClass().addClass('progress-bar progress-bar-info');
+	                        break;
+
+	                    case (score > 4):
+	                        $bar.html('Fuerte').css('width', '100%').removeClass().addClass('progress-bar progress-bar-success');
+	                        break;
+
+	                    default:
+	                        break;
+	                }
+	            }
+	        }).on('success.form.fv', function(e) {
+	            e.preventDefault();
+	            var $form = $(e.target);
+	            var bv = $form.data('formValidation');
+	            $.post($form.attr('action'), $form.serialize(), function(result) {
+	            	if(result.status==true){
+	            		$('.modal').modal('hide');
+	            		$('#modalClave').modal('show');
+	            		$('#loginLabel').html(result.log_dat);
+	            		$('#claveLabel').html(result.cla_dat);
+	    	     		mostrarMensaje('info','Se realizo con exito la Transacción');
+	            	}else{
+	            		mostrarMensaje('error','Error: Ingrese su clave actual correctamente');
+	            	}           	
+	            }, 'json');
+	            $form.data('formValidation').resetForm();
+	        });
+		});
+	</script>
+	<div class="modal fade" tabindex="-1" role="dialog"
+		aria-labelledby="myLargeModalLabel" id="reportes" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<iframe id="frameReportes" width="100%" height="600px"></iframe>
+			</div>
+		</div>
+	</div>
+
+	<div id="modalAsignar" class="modal modal-success fade">
+		<div class="modal-dialog">
+			<form id="formularioAsignar" method="post"
+				action="../usuario/cambiarClave" data-fv-framework="bootstrap"
+				data-fv-excluded="disabled"
+				data-fv-icon-valid="glyphicon glyphicon-ok"
+				data-fv-icon-invalid="glyphicon glyphicon-remove"
+				data-fv-icon-validating="glyphicon glyphicon-refresh">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+						<h4 class="modal-title">Cambiar Clave</h4>
+					</div>
+					<div class="modal-body">
+						<input type="hidden" id="ciper" name="ciper" />
+						<p>
+							<img id="image" name="image" class="img-thumbnail" width="75px"
+								src="../../fotos/user.png"> Usuario <label
+								style="font-size: 24px;" id="usuarioLabel3"></label>
+						</p>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label for="log">Usuario</label> <input type="text"
+										class="form-control" id="login" name="login"
+										placeholder="Ingrese usuario" data-fv-notempty="true">
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label for="cla">Clave</label> <input type="password"
+										class="form-control" id="cla1" name="cla1"
+										placeholder="Ingrese clave" data-fv-notempty
+										data-fv-different="true" maxlength="32" minlength="8"
+										data-fv-different-field="claAnt"
+										data-fv-different-message="La nueva clave tiene que ser diferente" />
+									<div class="progress password-meter" id="passwordMeter">
+										<div class="progress-bar"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group" id="claveAnterior"
+									style="display: none;">
+									<label for="claAnt">Clave Anterior</label> <input type="hidden"
+										id="cla" name="cla" /> <input type="password"
+										class="form-control" id="claAnt" name="claAnt"
+										placeholder="Ingrese clave anterior" data-fv-identical="true"
+										data-fv-identical-field="cla"
+										data-fv-identical-message="La clave anterior es incorrecta">
+
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label for="cla2">Confirmar Clave</label> <input
+										type="password" class="form-control" id="cla2" name="cla2"
+										placeholder="repita clave" maxlength="32" minlength="8"
+										data-fv-notempty data-fv-identical="true"
+										data-fv-identical-field="cla1">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-outline pull-left"
+							data-dismiss="modal">
+							<i class="fa fa-times-circle"></i> Cancelar
+						</button>
+						<button type="submit" class="btn btn-outline">
+							<i class="fa fa-check-circle"></i> Guardar
+						</button>
+					</div>
+				</div>
+				<!-- /.modal-content -->
+			</form>
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+	<div id="modalClave" class="modal modal-success fade">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title">Datos del Usuario</h4>
+				</div>
+				<div class="modal-body">
+					<div class="small-box bg-aqua">
+						<div class="inner">
+							<h4>
+								Usuario : <b id="usuario1Label">$user</b>
+							</h4>
+							<p>
+								Login : <b id="loginLabel"></b>
+							</p>
+							<p>
+								Clave : <b id="claveLabel"></b>
+							</p>
+						</div>
+						<div class="icon">
+							<i class="fa fa-expeditedssl"></i>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success btn-block"
+						data-dismiss="modal">SALIR</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+</body>
+</html>

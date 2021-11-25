@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="jugador_ver" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="08d60a65-0e04-462f-bd1d-72159d3b46b3">
+	<property name="ireport.zoom" value="1.2100000000000006"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="path" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="codjug" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.lang.String"/>
+	<parameter name="path2" class="java.lang.String"/>
+	<parameter name="codgen" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[select acropro,(select concat(p1.nomper,' ',p1.priapper)presidente from directiva join persona p1 on p1.codper=directiva.codper where cargo='Presidente'  and codgen=$P{codgen}),ciper,nomper,concat(priapper,' ',segapper) as apellidos,fotjug,año_obtener(codjug)as edad,fecnacper from jugador
+join persona on persona.codper=jugador.codper
+join provincia on provincia.codpro=jugador.codpro where jugador.codjug=$P{codjug};]]>
+	</queryString>
+	<field name="acropro" class="java.lang.String">
+		<fieldDescription><![CDATA[acronimo de la asociación municipal]]></fieldDescription>
+	</field>
+	<field name="presidente" class="java.lang.String"/>
+	<field name="ciper" class="java.lang.String">
+		<fieldDescription><![CDATA[cedula de indentidad de la persona]]></fieldDescription>
+	</field>
+	<field name="nomper" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre de la persona]]></fieldDescription>
+	</field>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="fotjug" class="java.lang.String">
+		<fieldDescription><![CDATA[fotografia del jugador]]></fieldDescription>
+	</field>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="fecnacper" class="java.sql.Date">
+		<fieldDescription><![CDATA[fecha de nacimiento de la persona]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="201" splitType="Stretch">
+			<rectangle>
+				<reportElement x="290" y="0" width="282" height="199" backcolor="#FFFFFF" uuid="74e57861-f82f-4be0-b9dc-4aa6b7b0989d"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="282" height="199" backcolor="#FFFFFF" uuid="c0cd6a38-53fb-4054-ab8a-38ac9255fcbc"/>
+			</rectangle>
+			<image onErrorType="Blank">
+				<reportElement x="214" y="40" width="61" height="65" uuid="f83e46cd-1abe-4127-b102-82a55aa548b8"/>
+				<imageExpression><![CDATA[$P{path}+$F{fotjug}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="57" y="40" width="157" height="21" uuid="dd104668-dfae-4620-bcf8-50ba84a0c358"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{apellidos}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="82" width="157" height="15" uuid="74c79a9d-d63c-460c-b2b3-a75ded09097b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ciper}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="97" width="89" height="15" uuid="b3061928-74e7-4f4b-a5e2-af68b20afbdc"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="57" y="112" width="89" height="15" uuid="13bb53b1-265a-4719-a651-f481045b8844"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acropro}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="40" width="48" height="15" uuid="1885a4bb-836c-43ab-bb1f-87616e2fe555"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="82" width="26" height="15" uuid="0d2da786-eeae-49de-a2da-baba23122a77"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CI:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="97" width="26" height="15" uuid="3b43ed32-58f6-46ec-9687-796d499981f4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="9" y="112" width="48" height="15" uuid="6b84a511-ba66-46e1-987c-246ed5fa196f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Municipio:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="61" width="157" height="21" uuid="ebea2bfe-c185-451a-9426-949ac831bfcb"/>
+				<textElement verticalAlignment="Top">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomper}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="61" width="48" height="15" uuid="a478dc6a-594d-451f-9b22-4e460269f644"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="6" width="211" height="29" uuid="3f8482b3-dd2a-4883-bad2-68c3d029a4da"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ASOCIACIÓN DEPARTAMENTAL DE TENIS DE MESA]]></text>
+			</staticText>
+			<image onErrorType="Blank">
+				<reportElement mode="Transparent" x="13" y="6" width="32" height="29" backcolor="#C0D7CD" uuid="b2439dfd-40ae-4936-a3a1-4e142fd04249"/>
+				<imageExpression><![CDATA[$P{path2}+$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="67" y="180" width="151" height="15" uuid="63a76178-f4f9-44e0-9c0a-69ea32c3eb72"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Presidente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="57" y="165" width="168" height="15" uuid="324a40db-177b-4c7a-9673-3bc7dfd760f8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{presidente}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="9" y="127" width="58" height="15" uuid="6ad64ffd-7379-4633-8e2e-fd4ce2d40222"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[F. Nacimiento:]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="67" y="127" width="89" height="15" uuid="330fd23b-490e-44b6-8376-bfbfd11f93ef"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecnacper}]]></textFieldExpression>
+			</textField>
+			<image onErrorType="Blank">
+				<reportElement mode="Transparent" x="377" y="42" width="106" height="105" backcolor="#C0D7CD" uuid="96d282ca-4338-4ec6-8660-080c8151092d"/>
+				<imageExpression><![CDATA[$P{path2}+$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_liga" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="81face92-e5e4-4dd5-9ed8-edc4b480c8b7">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="123"/>
+	<parameter name="codlig" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="subrep" class="java.lang.String"/>
+	<parameter name="subrep1" class="java.lang.String"/>
+	<parameter name="subrep2" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\PERSONAL-HP245\\workspace_neon\\tenis_de_mesa\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select ligas.nomlig,to_char(fecini,'dd/MM/yyyy') as inicio,to_char(fecfin,'dd/MM/yyyy') as fin from ligas where codlig=$P{codlig}]]>
+	</queryString>
+	<field name="nomlig" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre de la liga]]></fieldDescription>
+	</field>
+	<field name="inicio" class="java.lang.String"/>
+	<field name="fin" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<textField>
+				<reportElement x="141" y="16" width="281" height="43" uuid="c1672aae-3689-4304-9dc6-f7081970e35c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nomlig}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="59" width="100" height="20" uuid="54813293-8358-4ec5-b340-16c1fce79ce2"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{inicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="472" y="59" width="100" height="20" uuid="4bb8d2e8-aba5-4ebd-ad09-55ef7f512ef0"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fin}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="448" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="472" height="196" isRemoveLineWhenBlank="true" uuid="072d8ad1-c538-4033-a359-31401ab94de1"/>
+				<subreportParameter name="codlig">
+					<subreportParameterExpression><![CDATA[$P{codlig}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subrep} + "lista_liga_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="213" width="472" height="196" uuid="6d76ae65-b3ce-41a7-8837-aa02b87b3969"/>
+				<subreportParameter name="codlig">
+					<subreportParameterExpression><![CDATA[$P{codlig}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subrep1} + "lista_liga_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="425" width="472" height="23" uuid="c2833dbe-17be-481f-a34c-b52b0ae5ae31"/>
+				<subreportParameter name="codlig">
+					<subreportParameterExpression><![CDATA[$P{codlig}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subrep2} + "lista_liga_subreport3.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="425" y="0" width="147" height="20" uuid="bcaef89e-0f73-4fbf-97b4-4b09b47cd1d3"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

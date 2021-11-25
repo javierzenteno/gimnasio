@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_provincia" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8f036e09-a56c-43e6-a567-eb840ab89089">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codpro" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT jugador.codjug,acropro,concat(nomper,' ',priapper,' ',segapper) as jugador,año_obtener(codjug) as edad,concat(madera,' ',gomad,' ',gomar) as material from jugador
+join persona on persona.codper=jugador.codper
+join provincia on provincia.codpro=jugador.codpro
+where provincia.codpro=$P{codpro} and codjug>0 order by edad]]>
+	</queryString>
+	<field name="codjug" class="java.lang.Integer">
+		<fieldDescription><![CDATA[codigo de jugador]]></fieldDescription>
+	</field>
+	<field name="acropro" class="java.lang.String">
+		<fieldDescription><![CDATA[acronimo de la asociación municipal]]></fieldDescription>
+	</field>
+	<field name="jugador" class="java.lang.String"/>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="material" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="108" y="40" width="535" height="39" uuid="7a3dfba7-d6de-40c8-a4e4-34af44c388d4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE JUGADORES POR PROVINCIA	]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="269" y="15" width="101" height="20" isPrintInFirstWholeBand="true" uuid="51518072-3c03-411f-bcf6-089315412c9a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROVINCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="15" width="55" height="20" isPrintInFirstWholeBand="true" uuid="ce2b0f2d-3f31-4e2a-afce-d6c57d8bfe92"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="63" y="15" width="206" height="20" isPrintInFirstWholeBand="true" uuid="ac8d24e3-0c84-460f-9a5a-9323b8298591"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUGADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="63" height="20" isPrintInFirstWholeBand="true" uuid="b54f462f-5666-4404-a6d1-f350bcbb3c36"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="425" y="15" width="327" height="20" isPrintInFirstWholeBand="true" uuid="076f967f-d524-44af-a830-9241b60ae5c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIAL]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="64" y="1" width="206" height="20" uuid="76f0794c-2c45-48d1-9f46-204ec9deab81"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{jugador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="1" width="326" height="20" uuid="a96a69be-ef95-4ae0-a080-518954fca341"/>
+				<textElement textAlignment="Left">
+					<font size="12"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{material}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="1" width="63" height="20" uuid="4607b1e7-886e-46ec-a576-b3d45abeb7ae"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codjug}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="371" y="1" width="55" height="20" uuid="3e90f03f-b887-43ea-a412-112872ca29a1"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="1" width="101" height="20" uuid="ef2e295a-e948-4659-aa68-b192948f0440"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{acropro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="606" y="0" width="146" height="20" uuid="b74ef0f8-f498-4e4f-a5c2-c7eaf700545a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

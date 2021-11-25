@@ -1,0 +1,394 @@
+<div class="panel panel-primary">
+  <div class="panel-heading" style="background-color: #373e4a;"><h2 align="center">Reportes Generales</h2></div>
+  <div class="panel-body">
+  <div class="row">
+  	<div class="col-md-6">
+  	<form id="formulario5" name="formulario5" class="form-inline" action="../reportes/reporte5">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Jugadores por Provincia</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+				<label>Elija Provincia</label>
+				<div class="form-group">
+				<select id="pro" name="pro" data-placeholder="[Seleccione Provincia]" class="form-control" data-fv-notempty="true">
+					<option value=""></option>#foreach($p in $provincias)
+					<option value="$p.codpro">$p.nompro</option>
+					#end
+				</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>	
+  	</div>
+  	<div class="col-md-6">
+  		<form id="formulario2" name="formulario2" class="form-inline" action="../reportes/reporte2">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Jugadores por Categoria</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+				<label>Elija Categoria</label>
+				<select id="cat" name="cat" data-placeholder="[Seleccione Categoria]" class="form-control" data-fv-notempty="true">
+					<option value=""></option>
+					<option value="11">Sub 11</option>
+					<option value="13">Sub 13</option>
+					<option value="15">Sub 15</option>
+					<option value="18">Sub 18</option>
+					<option value="21">Sub 21</option>
+					<option value="40">Mayores</option>
+					<option value="80">Seniors</option>
+				</select>
+			</div>
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  </div>
+  
+  
+  <div class="row">
+  	<div class="col-md-6">
+  	<form id="formulario1" name="formulario1" class="form-inline" action="../reportes/reporte1"
+  		data-fv-framework="bootstrap"
+              	data-fv-excluded="disabled"
+    			data-fv-icon-valid="glyphicon glyphicon-ok"
+    			data-fv-icon-invalid="glyphicon glyphicon-remove"
+    			data-fv-icon-validating="glyphicon glyphicon-refresh">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Jugadores</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+				<label>Imprimir</label>
+			</div>
+			<div class="col-md-2">
+				<button type="submit" id="btnReporte1" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  	<div class="col-md-6">
+  		<form id="formulario6" name="formulario6" class="form-inline" action="../reportes/reporte6">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Carnet de Deportistas</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+				<label>Imprimir</label>
+			</div>
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  </div>
+     <div class="row">
+  		<div class="col-md-6">
+  		<form id="formulario3" name="formulario3" class="form-inline" action="../reportes/reporte3">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Árbitros</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+				<label>Imprimir</label>
+			</div>
+			
+			<div class="col-md-2">
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  	<div class="col-md-6">
+  		
+	  		<form id="formulario4" name="formulario4" class="form-inline" action="../reportes/reporte4">
+	  		<div class="panel panel-default">
+	  			<div class="panel-heading">Reporte de Entrenadores</div>
+	  			<div class="panel-body">
+				<div class="row">
+				<div class="col-md-5">
+					<label>Imprimir</label>
+				</div>
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+				</div>
+				</div>
+				</div>
+			</div>
+			</form>
+  		
+  	</div>
+  </div>
+       <div class="row">
+  		<div class="col-md-6">
+  		<form id="formulario10" name="formulario10" class="form-inline" action="../reportes/reporte10">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Notas</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-xs-8">
+				<label>Fecha</label>
+				<div class="input-group">
+					<input id="fnot" name="fnot" type="text" class="form-control" data-fv-notempty="true" placeholder="dd/mm/yyyy - dd/mm/yyyy" style="width:200px">
+					<div class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></div>
+				</div>	
+			</div>
+			
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  	<div class="col-md-6">
+  		
+	  		<form id="formulario11" name="formulario11" class="form-inline" action="../reportes/reporte11">
+	  		<div class="panel panel-default">
+	  			<div class="panel-heading">Reporte de Convocatorias</div>
+	  			<div class="panel-body">
+				<div class="row">
+				<div class="col-xs-8">
+					<label>Fecha</label>
+					<div class="input-group">
+						<input id="fcon" name="fcon" type="text" class="form-control" data-fv-notempty="true" placeholder="dd/mm/yyyy - dd/mm/yyyy" style="width:200px">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<label>Imprimir</label>
+					<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+				</div>
+				</div>
+				</div>
+			</div>
+			</form>
+  		
+  	</div>
+  </div>
+   <div class="row">
+  	<div class="col-md-6">
+  		<form id="formulario7" name="formulario7" class="form-inline" action="../reportes/reporte7">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Torneos</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+			<label>Elija Torneo</label>
+				<div class="form-group">
+				<select id="codtor" name="codtor" data-placeholder="[Seleccione Torneo]" class="form-control" data-fv-notempty="true">
+					<option value=""></option>#foreach($t in $torneo)
+					<option value="$t.codtor">$t.nomtor ($t.fecha)</option>
+					#end
+				</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  	<div class="col-md-6">
+  		<form id="formulario8" name="formulario8" class="form-inline" action="../reportes/reporte8">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Fechas de Liga</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+			<label>Elija Fecha</label>
+				<div class="form-group">
+				<select id="codtor" name="codtor" data-placeholder="[Seleccione Torneo]" class="form-control" data-fv-notempty="true">
+					<option value=""></option>#foreach($f in $fechas)
+					<option value="$f.codtor">$f.nomtor ($f.fecha)</option>
+					#end
+				</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  </div>
+
+ <div class="row">
+  	<div class="col-md-6">
+  		<form id="formulario7" name="formulario12" class="form-inline" action="../reportes/reporte12">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Ingresos</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+			<label>Elija Gestión</label>
+				<div class="form-group">
+				<select id="codgen" name="codgen" data-placeholder="[Seleccione Gestión]" class="form-control" data-fv-notempty="true">
+					<option value=""></option>#foreach($g in $gestiones)
+					<option value="$g.codgen">$g.codgen</option>
+					#end
+				</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  	<div class="col-md-6">
+  		<form id="formulario8" name="formulario14" class="form-inline" action="../reportes/reporte14">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Egresos</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+			<label>Elija Gestión</label>
+				<div class="form-group">
+				<select id="codgen" name="codgen" data-placeholder="[Seleccione Gestión]" class="form-control" data-fv-notempty="true">
+					<option value=""></option>#foreach($g in $gestiones)
+					<option value="$g.codgen">$g.codgen</option>
+					#end
+				</select>
+				</div>
+			</div>
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  </div>
+  <div class="row">
+  	<div class="col-md-6">
+  			<form id="formulario13" name="formulario13" class="form-inline" action="../reportes/reporte13">
+	  		<div class="panel panel-default">
+	  			<div class="panel-heading">Reporte de Asoc. Municipales</div>
+	  			<div class="panel-body">
+				<div class="row">
+				<div class="col-md-5">
+					<label>Imprimir</label>
+				</div>
+				<div class="col-md-2">
+					<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+				</div>
+				</div>
+				</div>
+			</div>
+			</form>
+  		
+  	</div>
+  	<div class="col-md-6">
+  		<form id="formulario9" name="formulario9" class="form-inline" action="../reportes/reporte9">
+  		<div class="panel panel-default">
+  			<div class="panel-heading">Reporte de Nacionales</div>
+  			<div class="panel-body">
+			<div class="row">
+			<div class="col-md-5">
+			<label>Elija Nacional</label>
+				<div class="form-group">
+				<select id="nac" name="nac" data-placeholder="[Seleccione Nacional]" class="form-control" data-fv-notempty="true">
+					<option value=""></option>#foreach($n in $nacionales)
+					<option value="$n.codnac">$n.nomnac</option>
+					#end
+				</select>
+				</div>
+			</div>
+			
+			<div class="col-md-2">
+				<label>Imprimir</label>
+				<button type="submit" class="btn btn-info"><i class="glyphicon glyphicon-print"></i></button>
+			</div>
+			</div>
+			</div>
+		</div>
+		</form>
+  	</div>
+  </div> 
+  <div class="row">
+  		
+  	  	<div class="col-xs-12">
+  		<address>
+		  <strong>SISTEMA DE ADMINISTRACIÓN DE LA ASOCIACIÓN DEPARTAMENTAL DE TENIS DE MESA</strong><br>
+		  TALLER III INGENIERIA INFORMÁTICA U.A.J.M.S.<br>
+		  TARIJA - BOLIVIA<br>
+		  TELF: <abbr title="Phone">77128325</abbr> 
+		</address>
+		 
+		<address>
+		  <strong>Correo Eléctronico</strong><br>
+		  <a href="mailto:#">javierzenteno0@gmail.com</a>
+		</address>
+  	</div>
+  </div>
+  
+  </div>
+</div>
+<script>
+$(document).ready(function(){
+	
+	des_detcom={validators: {notEmpty: {message: 'ingresar'},numeric:{message:'numero'}}}
+	$('a').tooltip({animated: 'fade',placement: 'bottom',});
+	$('select').chosen({no_results_text: "No se encuentra:",width:'100%'});
+	$('#fnot').daterangepicker({
+		 format: 'DD/MM/YYYY'
+    });
+	$('#fcon').daterangepicker({
+		 format: 'DD/MM/YYYY'
+   });
+	$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+	$('#btnReporte1').click(function(){
+		});
+	$('#lig1').chosen().change(function(){
+		$.post('../reportes/list_fecha?lig1='+$('#lig1 option:selected').data('id'),function(res){
+			$('#fec').html('').trigger('chosen:updated');
+			$.each(res.data,function(i,val){
+				$('#fec').append('<option value="'+val.codfec+'">'+val.numero+' '+val.fecha+'</option>');
+				$('#fec').trigger('chosen:updated');
+			});
+			
+		});
+	});
+	$('#formulario1,#formulario2,#formulario3,#formulario4,#formulario5,#formulario6,#formulario7,#formulario8,#formulario9,#formulario10,#formulario11,#formulario12,#formulario13').formValidation(
+				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+          e.preventDefault();
+          var $form = $(e.target);
+          	$("#frameReportes").attr("src", $form.attr('action')+'?'+ $form.serialize());
+          	$form.data('formValidation').resetForm();
+			$("#reportes").modal('show');
+      });
+});
+</script>

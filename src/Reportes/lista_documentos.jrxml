@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_documentos" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="98d7dfee-5b28-410a-92fd-de2d682fb948">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="gestion" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select documento.coddoc,to_char(feccredoc,'dd/MM/yyyy') as creacion,ubidoc,concat(nomper,' ',priapper) usuario from documento join persona on persona.codper=documento.codpercre where feccredoc<=to_date(concat('31/12',$P{gestion}),'dd/MM/yyyy') order by coddoc]]>
+	</queryString>
+	<field name="coddoc" class="java.lang.Long">
+		<fieldDescription><![CDATA[codigo de documento]]></fieldDescription>
+	</field>
+	<field name="creacion" class="java.lang.String"/>
+	<field name="ubidoc" class="java.lang.String">
+		<fieldDescription><![CDATA[ubicacion fisica del documento]]></fieldDescription>
+	</field>
+	<field name="usuario" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="67" splitType="Stretch">
+			<staticText>
+				<reportElement x="110" y="36" width="535" height="31" uuid="6d0a2f26-e577-46ae-aec9-b17dc7163a9f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE DOCUMENTOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="264" y="15" width="59" height="20" isPrintInFirstWholeBand="true" uuid="22980fef-52ca-4017-925d-0ea2ed3c9fca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[F. CRE.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="15" width="24" height="20" isPrintInFirstWholeBand="true" uuid="afc66d92-d50e-4ae5-be5a-69d84b6a2c8d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="622" y="15" width="92" height="20" isPrintInFirstWholeBand="true" uuid="881e8c84-e8ad-43f6-9992-c5bff96a295f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[USUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="24" y="15" width="240" height="20" isPrintInFirstWholeBand="true" uuid="6723514f-2651-4a86-b1b5-fdeb4447b817"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TITULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="376" y="15" width="246" height="20" isPrintInFirstWholeBand="true" uuid="70b595f5-7118-4a52-945b-a3f1c2cb9899"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REMITENTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="323" y="15" width="53" height="20" isPrintInFirstWholeBand="true" uuid="05aec6b8-f685-426e-a8eb-bcc0a1f92144"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[F. ENT.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="714" y="15" width="38" height="20" isPrintInFirstWholeBand="true" uuid="f4742157-241f-428f-b358-dfe9724f2c75"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField>
+				<reportElement x="622" y="0" width="92" height="46" uuid="0a8d1427-5b28-40a6-8e29-f397ab5879a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="323" y="0" width="53" height="46" uuid="4ff90dc2-100e-4f91-bf63-6a9d87198c1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{entrega}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="264" y="0" width="59" height="46" uuid="d0ef4ed6-e22e-49d6-b77d-804ece8ff795"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{creacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="24" height="46" uuid="e373ba09-fa5a-4acf-b7a6-dbcd43dfcbe1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{coddoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="0" width="240" height="46" uuid="f16cbf7b-b851-4bcb-b80c-68ea555fe723"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{titdoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="376" y="0" width="246" height="46" uuid="d706abf3-edc3-45c2-aa31-335c18607279"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{remitente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="714" y="0" width="38" height="46" uuid="9989dc85-837c-422f-9b50-29fdd9ff719e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{tipdoc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="605" y="0" width="147" height="20" uuid="c1d4d018-ae81-48db-89d6-db2afafd5fb0"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

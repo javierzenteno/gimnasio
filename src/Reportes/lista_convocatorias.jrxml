@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_convocatorias" pageWidth="792" pageHeight="612" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ba81a4f9-c20a-4a90-a20c-96adb62b5d2d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fini" class="java.lang.String"/>
+	<parameter name="ffin" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select to_char(feccredoc,'dd/MM/yyyy') creacion,to_char(fecmoddoc,'dd/MM/yyyy') modificacion,titcon, to_char(feccredoc,'dd/MM/yyyy') publicacion,tipcon,concat(p1.nomper,' ',p1.priapper) as crea,concat(p2.nomper,' ',p2.priapper) as modifica,ubidoc
+from documento
+join persona p1 on p1.codper=documento.codpercre
+join convocatoria on convocatoria.coddoc=documento.coddoc
+left join persona p2 on p2.codper=documento.codpermod
+where to_date($P{fini},'dd/MM/yyyy')<=feccredoc and feccredoc<=to_date($P{ffin},'dd/MM/yyyy')]]>
+	</queryString>
+	<field name="creacion" class="java.lang.String"/>
+	<field name="modificacion" class="java.lang.String"/>
+	<field name="titcon" class="java.lang.String">
+		<fieldDescription><![CDATA[titulo de convocatoria]]></fieldDescription>
+	</field>
+	<field name="publicacion" class="java.lang.String"/>
+	<field name="tipcon" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[tipo de convocatoria true=asamblea,false=deportiva]]></fieldDescription>
+	</field>
+	<field name="crea" class="java.lang.String"/>
+	<field name="modifica" class="java.lang.String"/>
+	<field name="ubidoc" class="java.lang.String">
+		<fieldDescription><![CDATA[ubicacion fisica del documento]]></fieldDescription>
+	</field>
+	<variable name="modifica" class="java.lang.String">
+		<variableExpression><![CDATA[$F{modifica}==null?"":$F{modifica}]]></variableExpression>
+		<initialValueExpression><![CDATA[$F{modifica}==null?"":$F{modifica}]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="752" height="42" uuid="b1b49662-55e2-4de7-894c-620484d04d67"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lista de Convocatorias]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="205" height="16" uuid="43c85345-36a2-4749-bf72-89de2e85a16f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Titulo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="65" height="16" uuid="ca8c961b-3e3d-4c6d-855d-df4d3694c063"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tipo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="1" width="100" height="16" uuid="745da8a5-a363-420b-ab39-1ac1810190ae"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Publicación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="179" height="16" uuid="ce7e5dc1-08e4-424a-bdb5-8117d05b40e6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ubicación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="549" y="0" width="102" height="16" uuid="b4274378-d751-4810-a229-2d7d5cd338dc"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Creación]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="651" y="0" width="101" height="16" uuid="4e7506f0-c1b9-4140-aa86-2922ef7715a7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Modificación]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="205" height="15" uuid="b44d0476-cf52-4623-9266-aba557d79df6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{titcon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="549" y="0" width="44" height="15" uuid="f0e0f692-792f-4737-9978-7d1f637c9cee"/>
+				<box>
+					<rightPen lineWidth="0.7" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{creacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="179" height="15" uuid="426ae038-8d37-44c7-b433-da9aea148a8e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ubidoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="0" width="65" height="15" uuid="f90d71ec-e491-489d-980b-e3755beff209"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{tipcon})?"Asamblea":"Deportivo"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="651" y="0" width="43" height="15" uuid="0b07f40c-b606-4025-8563-4cf42dd129e7"/>
+				<box>
+					<rightPen lineWidth="0.7" lineStyle="Solid"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{modificacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="1" width="100" height="15" uuid="b8c57ccc-9a9e-4e7c-bec4-c94551d32a10"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{publicacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="593" y="1" width="58" height="14" uuid="303fe4fd-39b2-4944-91e8-427e4de2c7e7"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{crea}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="694" y="0" width="58" height="16" uuid="478b5c95-29f5-4ed1-9d81-b76be099d2dd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7"/>
+					<paragraph leftIndent="3"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{modifica}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+	<noData>
+		<band height="20">
+			<staticText>
+				<reportElement x="205" y="0" width="341" height="20" uuid="15848fcb-b989-4225-893c-af6b96159674"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[No existen registros]]></text>
+			</staticText>
+		</band>
+	</noData>
+</jasperReport>

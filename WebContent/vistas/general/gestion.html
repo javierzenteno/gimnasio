@@ -1,0 +1,729 @@
+<script src="../../js/fileinput.js"></script>
+ <form name="formulario" role="form" id="formulario" method="post" action="../general/guardar" enctype="multipart/form-data"
+	data-fv-excluded="disabled"	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">                       
+
+<div class="modal modal-primary fade" id="modalAdicionar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Añadir Nueva Gestión</h4>
+      </div>
+      <div class="modal-body">
+      			<div class="row">
+      			<div class="col-xs-12">
+	      			<div class="row">
+		      			<div class="col-lg-8">
+							<div class="form-group">
+				                 <label>Nombre</label>
+				                 <input type="text" class="form-control" id="nomgen" name="nomgen" data-fv-notempty="true" placeholder="ingrese nombre">
+				            </div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+				                 <label>Acronimo</label>
+				                 <input type="text" class="form-control" id="acrgen" name="acrgen" data-fv-notempty="true" placeholder="ingrese acronimo">
+				            </div>
+						</div>
+					</div>
+      			</div>
+      			<div class="col-xs-12">
+					<div class="row">
+						<div class="col-xs-8">
+							<div class="form-group">
+								<label>Direccion</label>
+								<input type="text" class="form-control" id="dirgen" name="dirgen" data-fv-notempty="true" placeholder="ingrese direccion">
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="form-group">
+								<label>Telefono</label>
+								<input type="text" class="form-control" id="telgen" name="telgen" data-fv-notempty="true" placeholder="ingrese telefono" data-fv-phone="true" data-fv-phone-country="AE" data-fv-phone-message="Introduzca un numero de telefono valido" value="+591">
+							</div>						
+						</div>
+					</div>
+					<div class="form-group">
+					<label>Logo:</label>
+					<input type="file" id="loggen" name="loggen" class="form-control input-md file" data-fv-file="true" data-fv-file-extension="jpg,jpeg,png"
+				           data-fv-file-type="image/jpeg,image/png" data-fv-file-maxsize="2097152" data-fv-file-message="elija un archivo valido">
+					</div>
+					<div class="form-group">
+					<label>Monto Inicio de Gestion </label>
+					<input type="text" class="form-control" id="monto" name="monto" data-fv-notempty="true" data-fv-numeric-decimalseparator="." placeholder="ingrese monto" data-fv-greaterthan="true" data-fv-greaterthan-value="1">
+					</div>
+				</div>
+      	</div>
+	</div>
+  <div class="modal-footer">
+        <button type="button" id="btnAdicionarConfirmacion" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-primary fade" id="modalAdicionarConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm"  role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de Confirmacion</h4>
+      </div>
+      <div class="modal-body">
+      			<label>Esta seguro de adicionar a esta Gestion?</label>
+			</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-social"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-primary btn-social" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
+</form>
+<form name="formularioModificar" role="form" id="formularioModificar" method="post" action="../general/actualizar" enctype="multipart/form-data"
+	data-fv-excluded="disabled"	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+<div class="modal modal-primary fade" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modificar Gestion</h4>
+      </div>
+      <div class="modal-body">
+      			<input type="hidden" id="codgen" name="codgen" />
+      			<label id="gestion"></label>
+      			<div class="row">
+      			<div class="col-xs-12">
+	      			<div class="row">
+		      			<div class="col-lg-8">
+							<div class="form-group">
+				                 <label>Nombre</label>
+				                 <input type="text" class="form-control" id="nomgen" name="nomgen" data-fv-notempty="true">
+				            </div>
+						</div>
+						<div class="col-lg-4">
+							<div class="form-group">
+				                 <label>Acronimo</label>
+				                 <input type="text" class="form-control" id="acrgen" name="acrgen" data-fv-notempty="true">
+				            </div>
+						</div>
+					</div>
+      			</div>
+      			<div class="col-lg-12">
+	      			<div class="row">
+	      				<div class="col-xs-8">
+							<div class="form-group">
+								<label>Direccion</label>
+								<input type="text" class="form-control" id="dirgen" name="dirgen" data-fv-notempty="true">
+							</div>
+						</div>
+						<div class="col-xs-4">
+							<div class="form-group">
+								<label>Telefono</label>
+								<input type="text" class="form-control" id="telgen" name="telgen" data-fv-notempty="true" data-fv-phone="true" data-fv-phone-country="AE" data-fv-phone-message="Introduzca un numero de telefono valido">
+							</div>						
+						</div>
+	      			</div>
+					<div class="form-group">
+						<label>Logo Actual:</label>
+						<img id="fotoAnt" width="80px">
+					</div>
+					<div class="form-group">
+						<label>Logo:</label>
+						<input type="file" id="loggen1" name="loggen" class="form-control input-md file" data-fv-file="true" data-fv-file-extension="jpg,jpeg,png"
+					           data-fv-file-type="image/jpeg,image/png" data-fv-file-maxsize="2097152" data-fv-file-message="elija un archivo valido">
+					</div>
+      			</div>
+      	</div>
+			</div>
+      <div class="modal-footer">
+        <button type="button" id="btnModificarConfirmacion" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+
+<div class="modal modal-primary fade" id="modalModificarConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de Confirmacion</h4>
+      </div>
+      <div class="modal-body">
+      			<label>Esta seguro de modificar a esta Gestion?</label>
+			</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
+ </form>
+ <form name="Persona" role="form" id="Persona" method="post" action="../usuario/guardar" data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" 
+	data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh">                       
+<div class="modal modal-primary fade" id="modalPersona" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Adicionar Nueva Persona</h4>
+      </div>
+      	<div class="modal-body">
+             <div class="row">
+             <div class="col-lg-3">
+             	<div class="form-group">
+                 <label>CI</label>
+                 <input type="text" class="form-control" id="ciper" name="ciper" data-fv-notempty="true" data-fv-stringlength="true" data-fv-stringlength-max="9" data-fv-stringlength-min="7">
+               </div>
+             </div>
+             <div class="col-lg-9">
+             	<div class="form-group">
+                 <label>Nombre</label>
+                 <input type="text" class="form-control" id="nomper" name="nomper" data-fv-notempty="true">
+               </div>
+             </div>
+             </div>
+             <div class="row">
+             <div class="col-lg-4">
+             	<div class="form-group">
+               	<label>Primer Apellido</label>
+               	<input type="text" class="form-control" id="priapper" name="priapper" data-fv-notempty="true">
+             	</div>
+             </div>
+             <div class="col-lg-4">
+             	<div class="form-group">
+               		<label>Segundo Apellido</label>
+               		<input type="text" class="form-control" id="segapper" name="segapper" >
+             	</div>
+             </div>
+             <div class="col-lg-4">
+             <div class="form-group">
+             <label>Fecha de Nacimiento</label>
+             <div class="input-group date fecha">
+             <input type="text" class="form-control" id="fecnacper" name="fecnacper" data-fv-notempty="true" >
+             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+             </div>
+             </div>
+             </div>
+             </div>
+             <div class="row">
+             <div class="col-lg-3">
+             	<div class="form-group">
+               		<label>Telefono</label>
+               		<input type="text" class="form-control" id="telper" name="telper" data-fv-notempty="true">
+             	</div>
+             </div>
+             <div class="col-lg-3">
+             	<div class="form-group">
+               		<label>Genero</label>
+               		<div class="input-group">
+							<label><input type="radio" name="genpro" value="true" data-fv-notempty="true"> Masculino</label> 
+							<label><input type="radio" name="genpro" value="false">Femenino</label>
+					</div>
+             	</div>
+             </div>
+             <div class="col-lg-6">
+             	<div class="form-group">
+               		<label>Correo Electronico</label>
+               		<input type="email" class="form-control" id="dirper" name="dirper" data-fv-notempty="true">
+             	</div>
+             </div>
+             </div>             
+		</div>
+      <div class="modal-footer">
+        <button type="button" id="btnPersonaConfirmacion" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal modal-primary fade" id="modalPersonaConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm"  role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de Confirmacion</h4>
+      </div>
+      <div class="modal-body">
+      			<label>Esta seguro de adicionar a esta Persona?</label>
+			</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<div class="modal modal-primary fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<form name="formularioEliminar" role="form" id="formularioEliminar" method="post" action="../general/eliminar"
+	data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Eliminar Gestion</h4>
+      </div>
+      <div class="modal-body">
+   			<input  type="hidden" id="codgen" name="codgen" />	
+   			<div class="row">
+   				<div class="col-md-3"><img id="fotoEliminar" class="img-thumbnail" width="75px" /> </div>
+   				<div class="col-md-9"><h3>Esta seguro que desea eliminar la Gestion <b id="jugadorLabel"></b>?</h3></div>
+   			</div>		
+	</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="modal modal-primary fade" id="modalHabilitar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<form name="formularioHabilitar" role="form" id="formularioHabilitar" method="post" action="../general/activar"
+	data-fv-excluded="disabled"	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Habilitar Gestion</h4>
+      </div>
+      <div class="modal-body">
+   			<input  type="hidden" id="codgen" name="codgen" />	
+   			<div class="row">
+   				<div class="col-md-3"><img id="fotoHabilitar" class="img-thumbnail" width="75px"/> </div>
+   				<div class="col-md-9"><h3>Esta seguro que desea habilitar la Gestion <b id="jugador1Label"></b>?</h3></div>
+   			</div>		
+	</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-social"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+  </form>
+</div>
+<div class="modal modal-primary fade" id="modalAsignar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<form name="formularioAsignar" role="form" id="formularioAsignar" method="post" action="../general/asignar"
+		data-fv-excluded="disabled" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+		data-fv-icon-validating="glyphicon glyphicon-refresh">
+	  <div class="modal-dialog modal-md" role="document">
+		<div class="modal-content" >
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<h4 class="modal-title" id="myModalLabel">Asignar Directiva a Gestion</h4>
+		  </div>
+		  <div class="modal-body">
+				   <input  type="hidden" id="codgen" name="codgen" />	
+				   <div class="row">
+					   <div class="col-xs-3"><img id="fotoAsignar" class="img-thumbnail" width="75px" /><h4>Gestion <b id="jugador2Label"></b></h4> </div>
+					   <div class="col-xs-9">
+					   		<div class="table-responsive">
+					   		<table id="dir_gestion" class="table " >
+					   			<thead>
+					   				<tr style="font-size: 12px">
+						   				<th width="50%" style="color: white;">Nombre</th>
+						   				<th width="40%" style="color: white;">Cargo</th>
+						   				<th width="10%" style="color: white;">Quitar</th>
+						   			</tr>
+					   			</thead>
+					   			<tbody >
+					   				
+					   			</tbody>
+					   		</table>
+					   		</div>
+					   		
+					   </div>
+				   </div>
+				   <div class="row form-group">
+					   			<div class="col-xs-6 form-group">
+					   				<label>Directivo</label>
+					   				<select id="per_add" name="per_add" data-placeholder="[Seleccione Persona]" class="form-control" >
+									<option value=""></option>#foreach($p in $dirnoadd)
+									<option value="$p.codper">$p.persona</option>#end
+								</select>
+					   			</div>
+						   			<div class="col-xs-4 form-group">
+						   			<label>Cargo</label>
+						   			<input type="text" class="form-control input-sm" id="cargo_add" name="cargo_add">
+					   			</div>
+					   			<div class="col-xs-2 form-group">
+					   				<label>Añadir</label>
+					   				<a id="dir_add" class="btn btn-success btn-xs"><i class="entypo-user-add"></i></a>
+					   			</div>
+				   </div>		
+		</div>
+		  <div class="modal-footer">
+			<button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+			<button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+		  </div>
+		</div>
+	  </div>
+	  </form>
+	</div>
+	<div class="col-lg-12">
+		<div class="panel" >
+			<div class="panel-heading"><h2 class="page-header" align="center">Gestion Generales</h2>
+				<div class="row">
+					<input type="hidden" id="general" value="$general">
+					<div class="col-xl-2 col-md-2 col-xs-12 pull-right" style="margin-bottom: 10px;">
+						<button class="btn btn-success" id="btnAdicionar">
+						<i class="fa fa-plus-square"></i> Nueva Gestion</button>
+					</div>
+					<div class="col-xl-4 col-xl-offset-1 col-md-4 col-md-offset-1 col-xs-12">
+						<div class="btn-group">
+							<label class="btn btn-success estado"> <input  type="radio" name="estgen" value="true" checked><i class="entypo-thumbs-up"></i> Activos</label> 
+							<label class="btn btn-danger estado"> <input  type="radio" name="estgen" value="false"><i class="entypo-thumbs-down"></i> Inactivos</label>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="panel-body panel-default">
+				<div class="dataTable_wrapper table-responsive">
+					<table id="example" class="table table-bordered table-hover">
+                        <thead>
+                        <tr style="font-size: 10px;top: 10%;">
+                        	<th width="5%">Logo</th>
+                        	<th width="40%" >Nombre</th>
+                        	<th width="55%">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody style="font-size: 12px">
+                        	
+                        </tbody>
+					</table>  
+				</div>
+			</div>
+		</div>
+	</div>
+ 
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                        	$('.fecha').datetimepicker({
+                          		 locale : 'es',
+                          		 format: 'L'
+                               });
+                        	$('#btnAdicionar').click(function(){
+                        		$('#formulario').data('formValidation').resetForm();
+                        		$('#formulario')[0].reset();
+                        		$('#codper').val('').trigger('chosen:updated');
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionar').modal('show');
+                        		
+                        	});
+                        	$('#btnPersona').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalPersona').modal('show');
+                        	});
+                        	$('#btnPersona1').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalPersona').modal('show');
+                        	});
+                        	$('#btnAdicionarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionarConfirmacion').modal('show');
+                        	});
+                        	$('#btnPersonaConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalPersonaConfirmacion').modal('show');
+                        	});
+                        	$('#btnModificarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalModificarConfirmacion').modal('show');
+                        	});
+                        	$('#dir_add').click(function(){
+                        		var row=$('<tr id="dir-'+$('#per_add option:selected').val()+'"></tr>');
+								$('<td style="color: white;">'+$('#per_add option:selected').text()+'</td>').appendTo(row);
+								$('<input type="hidden" name="codper" value="'+$('#per_add option:selected').val()+'" >').appendTo(row);
+								$('<td style="color: white;">'+$('#cargo_add').val()+'</td>').appendTo(row);
+								$('<input type="hidden" name="cargo" value="'+$('#cargo_add').val()+'" >').appendTo(row);
+								$('<td class="remove-row"><button type="button" id="remo-'+$('#per_add option:selected').val()+'" class="btn btn-danger btn-xs input-remove-row" data-id="'+$('#per_add option:selected').val()+'"><i class="entypo-cancel"></i></button></td>').appendTo(row);
+								$('#dir_gestion > tbody:last').append(row);
+								$('#per_add option:selected').attr('disabled','disabled');
+								$('#per_add').trigger("chosen:updated");
+								$('#per_add').val('').trigger("chosen:updated");
+								$('#cargo_add').val('');
+								row.find('.input-remove-row').last().click(function(){ 
+									console.log($('#per_add option[value='+$(this).data('id')+']').text()+' : btnAdd');
+									$('#per_add option[value='+$(this).data('id')+']').removeAttr("disabled");
+						    	    $("#per_add").trigger("chosen:updated");
+						    		var tr = $(this).closest('tr');
+						    	    tr.fadeOut(500, function(){
+						    	    	tr.remove();
+						    	    	if($('#dir_gestion > tbody>tr').length==0){
+						    	    		var row=$('<tr></tr>');
+						    	    		$('<td colspan="3" align="center">Sin Directiva</td>').appendTo(row);
+						    	    		$('#dir_gestion > tbody:last').append(row);
+						    	    	}
+						    		});
+						    	});
+                        	});
+                        	$('select').chosen({
+                        		no_results_text : "No se encuentra:",
+                        		width : '100%'
+                        	});
+                        	$('#example').dataTable( {
+                        		"dom":"f<button> ip",
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "responsive": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../general/lista",
+                      	        	"data": function ( d ) {
+                      	                d.estado = $('input[name=estgen]:checked').val();
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "codgen" },
+                      		                { "data": "codgen" },
+                      		              	{ "data": "codgen" }
+                      		    ],
+                      		    "createdRow": function ( row, data, index ){
+                      		    	$('td',row).eq(0).html('<img class="img-thumbnail" width="40px" src="../../img/'+data.loggen+'" />');
+                      		    	$('td',row).eq(1).html('Gestion : '+data.codgen+' - '+data.nomgen+' ('+data.acrgen+')');
+                      		    	if(data.codgen==$('#general').val()){
+                      		    	if(data.estgen==true){
+                      		    		$('td', row).eq(2).html('<div class="btn-group"><button class="modificar btn btn-info btn-sm"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="'+data.codgen+'"><i class="entypo-pencil"></i></button><button class="eliminar btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="'+data.codgen+'"><i class="entypo-trash"></i></button><button class="asignar btn btn-warning btn-sm"  data-toggle="tooltip" data-placement="top" title="Asignar" data-id="'+data.codgen+'"><i class="entypo-users"></i></button></div>');
+                      		        }else{
+                      					$('td', row).eq(2).html('<div class="btn-group"><button class="habilitar btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="Habilitar" data-id="'+data.codgen+'"><i class="entypo-ccw"></i></button></div>');
+                      				}
+                      		    	}else{
+                      		    		$('td', row).eq(2).html('');
+                      		    	}
+                      	        },
+                      	        "drawCallback": function( settings ) {	
+                              		$('.modificar').click(function(){ 
+                              			$('#formularioModificar').data('formValidation').resetForm();
+                                		$('#formularioModificar')[0].reset();
+                                  		$.post('../general/obtener?codgen='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalModificar').modal('show');
+                      							$('#formularioModificar').loadJSON(result.data);
+                      							$('#gestion').html(result.data.codgen);
+                      							//$('#codper1').val(result.data.codper).trigger('chosen:updated');
+                      							$('#fotoAnt').attr('src','../../img/'+result.data.loggen);
+                      						}else{
+                      		            		mostrarmensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.eliminar').click(function(){ 
+                              			$('#formularioEliminar').data('formValidation').resetForm();
+                                		$('#formularioEliminar')[0].reset();
+                                  		$.post('../general/obtener?codgen='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalEliminar').modal('show');
+                      							$('#formularioEliminar').loadJSON(result.data);
+                      							$('#fotoEliminar').attr('src','../../img/'+result.data.loggen);
+                      							$('#jugadorLabel').html(result.data.codgen);
+                      		            	}else{
+                      		            		mostrarmensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.habilitar').click(function(){ 
+                              			$('#formularioHabilitar').data('formValidation').resetForm();
+                                		$('#formularioHabilitar')[0].reset();
+                                  		$.post('../general/obtener?codgen='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalHabilitar').modal('show');
+                      							$('#formularioHabilitar').loadJSON(result.data);
+                      							$('#fotoHabilitar').attr('src','../../img/'+result.data.loggen);	
+                      							$('#jugador1Label').html(result.data.codgen);
+                      		            	}else{
+                      		            		mostrarmensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+									$('.asignar').click(function(){ 
+                              			$('#formularioAsignar').data('formValidation').resetForm();
+                                		$('#formularioAsignar')[0].reset();
+                                  		$.post('../general/obtenerd?codgen='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalAsignar').modal('show');
+                      							$('#formularioAsignar').loadJSON(result.data);
+                      							$('#dir_gestion >tbody').html('');
+                      							if(result.directiva !== null){
+                      								$.each(result.directiva,function(i,val){
+                      									var row=$('<tr id="dir-'+val.codper+'"></tr>');
+                      									$('<td style="color: white;">'+val.dir+'</td>').appendTo(row);
+                      									$('<input type="hidden" name="codper" value="'+val.codper+'" >').appendTo(row);
+                      									$('<td style="color: white;">'+val.cargo+'</td>').appendTo(row);
+                      									$('<input type="hidden" name="cargo" value="'+val.cargo+'" >').appendTo(row);
+                      									$('<td class="remove-row"><button type="button" id="remo-'+val.codper+'" class="btn btn-danger btn-xs input-remove-row" data-id="'+val.codper+'"><i class="entypo-cancel"></i></button></td>').appendTo(row);
+                      									$('#dir_gestion > tbody:last').append(row);
+                      									row.find('.input-remove-row').last().click(function(){
+                      										var tr = $(this).closest('tr');
+                      							    	    tr.fadeOut(100, function(){
+                      							    	    	tr.remove();
+                      							    	    	if($('#dir_gestion > tbody>tr').length==0){
+                      							    	    		var row=$('<tr></tr>');
+                      							    	    		$('<td colspan="3" align="center">Sin Directiva</td>').appendTo(row);
+                      							    	    		$('#dir_gestion > tbody:last').append(row);
+                      							    	    	}
+                      							    		});
+                      							    	});
+                      								});
+                      							}else{
+                      								var row=$('<tr></tr>');
+                      								$('<td colspan="3" align="center">Sin Directiva</td>').appendTo(row);
+                      								$('#dir_gestion > tbody:last').append(row);
+                      							}
+                      							$('#fotoAsignar').attr('src','../../img/'+result.data.loggen);
+                      							$('#jugador2Label').html(result.data.codgen);
+                      		            	}else{
+                      		            		mostrarmensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.ver').click(function(){ 
+                              			$("#frameReportes").attr("src",'../general/ver?codgen='+$(this).data('id'));
+                              			$("#reportes").modal('show');
+                              		});
+                              		$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                              		
+                      	        }
+                        } );
+                        $('.estado').click(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        $('#ciper').blur(function(){
+                      	  $.post('../usuario/validar?ciper='+$(this).val()	,function(resp){
+                      		  if(resp.status==true){
+                					$('#ciper').val('');
+                					$('#Persona').data('formValidation').resetForm();
+                					mostrarMensaje('error','Este CI ya existe!');
+                				}
+                			});
+                		});
+                        $('#formulario').formValidation({excluded: [':disabled']}).on('success.form.fv', function(e) {
+            	  			e.preventDefault();
+            	  		    var $form = $(e.target);
+            	  		    var formData=new FormData(document.getElementById("formulario"));
+            	  		    $.ajax({
+            	  		        url: $form.attr("action"),
+            	  		        type: "post",
+            	  		        dataType: "json",
+            	  		        data: formData,
+            	  		        cache: false,
+            	  		        contentType: false,
+            	  		        processData: false
+            	  		    	}).done(function(result){
+            	  			    	if(result.status){
+            	  	      	        	$('#example').dataTable().fnDraw('page');
+            	  	      	        $('#body').css('padding-right','-17px');
+            	  	      	        	mostrarMensaje('success','Se realizo con exito el Proceso');
+            	  			    	}else{
+            	  			    		mostrarMensaje('error','No se realizo con exito el Proceso');
+            	  			    	}
+            	  			    	$('.modal').modal('hide');
+            	  			    	$('#body').css('padding-right','-17px');
+            	  			    	$('#formulario')[0].reset();
+        	  			    		$form.data('formValidation').resetForm();
+            	  		    });
+            	  		});
+                        $('#formularioModificar').formValidation({excluded: [':disabled']}).on('success.form.fv', function(e) {
+            	  			e.preventDefault();
+            	  		    var $form = $(e.target);
+            	  		    var formData=new FormData(document.getElementById("formularioModificar"));
+            	  		    $.ajax({
+            	  		        url: $form.attr("action"),
+            	  		        type: "post",
+            	  		        dataType: "json",
+            	  		        data: formData,
+            	  		        cache: false,
+            	  		        contentType: false,
+            	  		        processData: false
+            	  		    	}).done(function(result){
+            	  			    	if(result.status){
+            	  	      	        	$('#example').dataTable().fnDraw('page');
+            	  	      	        $('#body').css('padding-right','-17px');
+            	  	      	        	mostrarMensaje('success','Se realizo con exito el Proceso');
+            	  			    	}else{
+            	  			    		mostrarMensaje('error','No se realizo con exito el Proceso');
+            	  			    	}
+            	  			    	$('.modal').modal('hide');
+            	  			    	$('#body').css('padding-right','-17px');
+            	  			    	$('#formularioModificar')[0].reset();
+        	  			    		$form.data('formValidation').resetForm();
+            	  		    });
+            	  		});
+                        $('#Persona').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status==true){
+                              		$('#Persona')[0].reset();
+                              		$form.data('formValidation').resetForm();
+                      	            $('#codper').append($('<option>',{
+                      	            	value : result.persona.codper,
+                      	            	text : result.persona.nomper.concat(' ',result.persona.priapper,' ',(typeof result.persona.segapper === 'undefined' || result.persona.segapper == null)?"":result.persona.segapper)
+                      	            }));
+                      	            $('#codper option[value='+result.persona.codper+']').attr('selected','selected');
+                      	            $('#codper').trigger('chosen:updated');
+                   	    	 		$('#modalPersona').modal('hide');
+                   	    	 		$('#modalPersonaConfirmacion').modal('hide');
+                      	        	mostrarMensaje('info','Se realizo con exito el Proceso');
+                      	        }else{
+                              		mostrarMensaje('error','No se realizo con exito el Proceso');
+                              	}
+                      	    }, 'json');
+                         });
+                        $('#formularioEliminar,#formularioHabilitar,#formularioAsignar').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status){
+                      	            $form.data('formValidation').resetForm();
+                      	            $('#formularioEliminar')[0].reset();
+                      	          	$('#formularioHabilitar')[0].reset();
+                      	          	$('#formularioAsignar')[0].reset();
+                      	        	$('#example').dataTable().fnDraw('page');
+									$('#body').css('padding-right','-17px');
+                      	        	mostrarMensaje('success','Se realizo con exito el Proceso');
+                      	        }else{
+                              		mostrarMensaje('error','No se realizo con exito el Proceso');
+                              	}
+                            	$('.modal').modal('hide');
+                            	$('#body').css('padding-right','-17px');
+                      	    }, 'json');
+                          });
+    						
+                        	$('#btnAdicionarTelefono').click(function(){
+                        		var row = $('<tr></tr>');
+                        		$('<td></td>').html('<input  type="text" id="telefonos" name="telefonos" placeholder="ingrese telefono" class="form-control input-md" data-fv-greaterthan="true" data-fv-greaterthan-value="100000" data-fv-integer="true" data-fv-notempty="true"/>').appendTo(row);
+                        		$('<td class="remove-row "></td>').html('<span class="glyphicon glyphicon-trash btn btn-danger btn-circle"></span>').appendTo(row);
+                        		$('.tablaTelefonos > tbody:last').append(row);
+                        	});
+                        	$('#btnAdicionarTelefono2').click(function(){
+                        		var row = $('<tr></tr>');
+                        		$('<td></td>').html('<input  type="text" id="telefonos2" name="telefonos2" placeholder="ingrese telefono" class="form-control input-md" data-fv-greaterthan="true" data-fv-greaterthan-value="100000" data-fv-integer="true" data-fv-notempty="true"/>').appendTo(row);
+                        		$('<td class="remove-row "></td>').html('<span class="glyphicon glyphicon-trash btn btn-danger btn-circle"></span>').appendTo(row);
+                        		$('.tablaTelefonos2 > tbody:last').append(row);
+                        	});
+                        	/* $(document).on('click', '.remove-row', function(){ 
+                        		var tr = $(this).closest('tr');
+                        	    tr.fadeOut(300, function(){
+                        	    	tr.remove();
+                        		});
+                        	}); */
+                        });
+                        </script>
+                

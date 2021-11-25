@@ -1,0 +1,441 @@
+<script src="../../js/fileinput.js"></script>
+ <form name="formulario" role="form" id="formulario" method="post" action="../fcarnet/guardar" enctype="multipart/form-data"
+	data-fv-excluded="disabled"	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">                       
+<div class="modal modal-primary fade" id="modalAdicionar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document" >
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Añadir Nueva Copia</h4>
+      </div>
+      <div class="modal-body">
+      	<div class="row">
+      	<input type="hidden" name="codgen" value="$gestion">
+      		<div class="col-md-12">
+					<div class="row">
+	      			<div class="col-md-6">
+						<div class="form-group">
+							<label>Persona</label>
+								<select id="codper" name="codper" data-placeholder="[Seleccione Persona]" class="form-control" data-fv-notempty="true">
+									<option value="">[Seleccione Persona]</option>
+									#foreach($p in $personas)
+									<option value="$p.codper">$p.nombre</option>#end
+								</select>
+						</div>
+					</div>
+					<div class="col-md-6">
+			            <div class="form-group">
+			            <label>Fecha de Caducidad</label>
+			            <div class="input-group">
+			            <input type="text" class="form-control input-md" id="fcaduco" name="fcaduco"  data-fv-notempty="true" >
+			            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			            </div>
+			            </div>
+			        </div>
+			        </div>
+			        <div class="row">
+			        <div class="col-md-12">
+						<div class="form-group">
+		                 <label>Ubicacion Fisica</label>
+		                 <input type="text" class="form-control" id="ubidoc" name="ubidoc" data-fv-notempty="true">
+		               	</div>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+							<label>Archivo Digital:</label>
+							<input type="file" id="pdfdoc" name="pdfdoc" class="form-control input-sm file" data-fv-notempty="true" data-fv-file="true" data-fv-file-extension="pdf"
+						           data-fv-file-type="application/pdf" data-fv-file-maxsize="5242880" data-fv-file-message="elija un archivo .pdf de tamaño menor a 5MB">
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>
+  <div class="modal-footer">
+        <button type="button" id="btnAdicionarConfirmacion" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal modal-primary fade" id="modalAdicionarConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm"  role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de Confirmacion</h4>
+      </div>
+      <div class="modal-body">
+      			<label>Esta seguro de adicionar a esta Copia?</label>
+			</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-social"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-primary btn-social" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
+</form>
+
+<form name="formularioModificar" role="form" id="formularioModificar" method="post" action="../fcarnet/actualizar" enctype="multipart/form-data"
+	data-fv-excluded="disabled"	data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove"
+	data-fv-icon-validating="glyphicon glyphicon-refresh">
+<div class="modal modal-primary fade" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modificar Copia</h4>
+      </div>
+      <div class="modal-body">
+      			<input type="hidden" id="codper1" name="codper" />
+      			<input type="hidden" id="coddoc" name="coddoc" />
+      		<div class="row">
+      		<div class="col-md-12">
+					<div class="row">
+	      			<div class="col-md-6">
+						<label>Persona</label><br>
+						<label id="udueño"></label>
+					</div>
+					<div class="col-md-6">
+			            <div class="form-group">
+			            <label>Fecha de Caducidad</label>
+			            <div class="input-group">
+			            <input type="text" class="form-control input-md" id="fcaduco" name="fcaduco"  data-fv-notempty="true" >
+			            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+			            </div>
+			            </div>
+			        </div>
+			        </div>
+			        <div class="row">
+			        <div class="col-md-12">
+						<div class="form-group">
+		                 <label>Ubicacion Fisica</label>
+		                 <input type="text" class="form-control" id="ubidoc" name="ubidoc" data-fv-notempty="true">
+		               	</div>
+					</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+						<label>Archivo Digital Previo</label>
+							<iframe id="pdfdoc2" name="pdfdoc2" width="100%" height="20%"></iframe>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+							<label>Archivo Digital:</label>
+							<input type="file" id="pdfdoc1" name="pdfdoc1" class="form-control input-sm file" data-fv-file="true" data-fv-file-extension="pdf"
+						           data-fv-file-type="application/pdf" data-fv-file-maxsize="5242880" data-fv-file-message="elija un archivo .pdf de tamaño menor a 5MB">
+							</div>
+						</div>
+					</div>
+				</div>
+		</div>	
+      </div>		
+      <div class="modal-footer">
+        <button type="button" id="btnModificarConfirmacion" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-floppy-disk"></i> Guardar</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> Cancelar</button>
+      </div>
+  </div>
+</div>
+</div>
+<div class="modal modal-primary fade" id="modalModificarConfirmacion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content" >
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Mensaje de Confirmacion</h4>
+      </div>
+      <div class="modal-body">
+      			<label>Esta seguro de modificar a esta Copia?</label>
+			</div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-social btn-primary"><i class="glyphicon glyphicon-ok"></i> Si</button>
+        <button type="button" class="btn btn-social btn-primary" data-dismiss="modal"><i class="glyphicon glyphicon-remove-sign"></i> No</button>
+      </div>
+    </div>
+  </div>
+</div>
+ </form>
+	<div class="col-lg-12">
+		<div class="panel" >
+			<div class="panel-heading"><h2 class="page-header" align="center">Gestion Copias de Carnet</h2>
+					<div class="row">
+					<div class="col-xs-12 col-md-4 col-xl-4 pull-right" style="margin-bottom: 10px;">
+						<button class="btn btn-success btn-sm" id="btnAdicionar">
+						<i class="fa fa-plus-square"></i> Nueva Copia </button>
+					</div>
+					<div class="col-xs-12 col-md-4 col-xl-4 " style="margin-bottom: 10px;">
+						<div class="btn-group">
+							<label class="btn btn-success btn-sm estado"> <input  type="radio" name="estcar" value="true" checked><i class="entypo-thumbs-up"></i> Vigentes</label> 
+							<label class="btn btn-danger btn-sm estado"> <input  type="radio" name="estcar" value="false"><i class="entypo-thumbs-down"></i> Caducos</label>
+						</div>
+					</div>
+				</div>	
+			</div>
+			<div class="panel-body panel-default">
+				<div class="dataTable_wrapper table-responsive">
+					<table id="example" class="table table-bordered table-hover">
+                        <thead>
+                        <tr style="font-size: 10px;top: 10%;">
+                        	<th width="30%">Persona</th>
+                        	<th width="5%">Creado</th>
+                        	<th width="5%">Modificado</th>
+                        	<th width="15%">Fecha de Caducidad</th>
+                        	<th width="15%">Ubicacion</th>
+                        	<th width="10px">Acciones</th>
+                        	<th width="15%">Usuario de Creacion</th>
+                        	<th width="15%">Usuario de Modificacion</th>
+                        </tr>
+                        </thead>
+                        <tbody style="font-size: 12px">
+                        	
+                        </tbody>
+					</table>  
+				</div>
+			</div>
+		</div>
+	</div>
+ 
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                        	var rang=['Club','Municipal','Departamental','Nacional','Internacional'];
+                        	$('#fecpubcon2').datetimepicker({
+                       		 format: 'DD/MM/YYYY'
+                            });
+                        	var f=new Date();
+                        	$('#fcaduco').datetimepicker({
+                          		 format: 'DD/MM/YYYY',
+                          		 minDate: f
+                               });
+                        	$('#fcaduco1').datetimepicker({
+                         		 format: 'DD/MM/YYYY',
+                         		 minDate: f
+                              });
+                        	$('#btnAdicionar').click(function(){
+                        		$('#formulario').data('formValidation').resetForm();
+                        		$('#formulario')[0].reset();
+                        		$('#codper').val('').trigger('chosen:updated');
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionar').modal('show');
+                        		
+                        	});
+                        	$('#btnAdicionarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionarConfirmacion').modal('show');
+                        	});
+                        	$('#btnPersonaConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalPersonaConfirmacion').modal('show');
+                        	});
+                        	$('#btnModificarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalModificarConfirmacion').modal('show');
+                        	});
+                        	$('select').chosen({
+                        		no_results_text : "No se encuentra:",
+                        		width : '100%'
+                        	});
+                        	
+                        	$('#example').dataTable( {
+                        		"dom":"f<button> ip",
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../fcarnet/lista",
+                      	        	"data": function ( d ) {
+                      	                d.estado = $('input[name=estcar]:checked').val();
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "udueño" },
+                      		              	{ "data": "coddoc" },
+                      		              	{ "data": "coddoc" },
+                      		              	{ "data": "fcaduco" },
+                    		              	{ "data": "ubidoc" },
+                      		                { "data": "coddoc" },
+                      		              	{ "data": "ucrea" },
+                      		            	{ "data": "umodifica" }
+                      		    ],
+                      		    "createdRow": function ( row, data, index ){
+                      		    	var fechaaux=' ';
+                      		    	if(data.fecmoddoc !== null){
+                      		    		fechaaux=data.fecmoddoc;
+                      		    	}
+                      		    	$('td',row).eq(1).html(data.feccredoc);
+                      		    	$('td',row).eq(2).html(fechaaux);
+                      		    	if(data.estcar==true){
+                      		    		if(data.ban==true){
+                          		    		$.post('../fcarnet/caducar?codper='+data.codper+'&coddoc='+data.coddoc,function(result){
+                          		    			if(result.status){
+                          		    				$.post('../fcarnet/gestion',function(result){
+                          		    					ir_pagina(result);
+                          		    					mostrarMensaje('success','Se caducaron Copias con exito el Proceso');
+                          		    				});
+                          		    			}
+                          		    		});
+                          		    	}
+                      		    	}
+                      		    	if(data.estcar==true){
+                      		    		$('td', row).eq(5).html('<div class="btn-group"><button class="modificar btn btn-info btn-xs"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="'+data.coddoc+'" data-per="'+data.codper+'"><i class="entypo-pencil"></i> Modificar</button></div>');
+                      		    	}else{
+                      					$('td', row).eq(5).html('');
+                      				}
+                      	        },
+                      	        "drawCallback": function( settings ) {	
+                              		$('.modificar').click(function(){ 
+                              			$('#formularioModificar').data('formValidation').resetForm();
+                                		$('#formularioModificar')[0].reset();
+                                  		$.post('../fcarnet/obtener?coddoc='+$(this).data('id')+'&codper='+$(this).data('per'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalModificar').modal('show');
+                      							$('#formularioModificar').loadJSON(result.data);
+                      							console.log(''+result.data.tipnot);
+                      							$('#tipnot1').val(''+result.data.tipnot).trigger('chosen:updated');
+                      							$('#pdfdoc2').attr('src','../../pdf/'+result.data.pdfdoc);
+                      						}else{
+                      		            		mostrarmensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.eliminar').click(function(){ 
+                              			$('#formularioEliminar').data('formValidation').resetForm();
+                                		$('#formularioEliminar')[0].reset();
+                                  		$.post('../fcarnet/obtener?coddoc='+$(this).data('id')+'&codper='+$(this).data('per'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalEliminar').modal('show');
+                      							$('#formularioEliminar').loadJSON(result.data);
+                      							$('#jugadorLabel').html(result.data.titnot);
+                      		            	}else{
+                      		            		mostrarmensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.habilitar').click(function(){ 
+                              			$('#formularioHabilitar').data('formValidation').resetForm();
+                                		$('#formularioHabilitar')[0].reset();
+                                  		$.post('../fcarnet/obtener?codnot='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalHabilitar').modal('show');
+                      							$('#formularioHabilitar').loadJSON(result.data);
+                      							$('#jugador1Label').html(result.data.titnot);
+                      		            	}else{
+                      		            		mostrarmensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.ver').click(function(){ 
+                              			$("#frameReportes").attr("src",'../fcarnet/ver?codnot='+$(this).data('id'));
+                              			$("#reportes").modal('show');
+                              		});
+                              		$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                              		
+                      	        }
+                        } );
+                        $('.estado').click(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        $('#formulario').formValidation({excluded: [':disabled']}).on('success.form.fv', function(e) {
+            	  			e.preventDefault();
+            	  		    var $form = $(e.target);
+            	  		    var formData=new FormData(document.getElementById("formulario"));
+            	  		    $.ajax({
+            	  		        url: $form.attr("action"),
+            	  		        type: "post",
+            	  		        dataType: "json",
+            	  		        data: formData,
+            	  		        cache: false,
+            	  		        contentType: false,
+            	  		        processData: false
+            	  		    	}).done(function(result){
+            	  			    	if(result.status){
+            	  	      	        	$('#example').dataTable().fnDraw('page');
+            	  	      	        $('#body').css('padding-right','-17px');
+            	  	      	        	mostrarMensaje('success','Se realizo con exito el Proceso');
+            	  			    	}else{
+            	  			    		mostrarMensaje('error','No se realizo con exito el Proceso');
+            	  			    	}
+            	  			    	$('.modal').modal('hide');
+            	  			    	$('#body').css('padding-right','-17px');
+            	  			    	$('#formulario')[0].reset();
+        	  			    		$form.data('formValidation').resetForm();
+            	  		    });
+            	  		});
+                        $('#formularioModificar').formValidation({excluded: [':disabled']}).on('success.form.fv', function(e) {
+            	  			e.preventDefault();
+            	  		    var $form = $(e.target);
+            	  		    var formData=new FormData(document.getElementById("formularioModificar"));
+            	  		    $.ajax({
+            	  		        url: $form.attr("action"),
+            	  		        type: "post",
+            	  		        dataType: "json",
+            	  		        data: formData,
+            	  		        cache: false,
+            	  		        contentType: false,
+            	  		        processData: false
+            	  		    	}).done(function(result){
+            	  			    	if(result.status){
+            	  	      	        	$('#example').dataTable().fnDraw('page');
+            	  	      	        $('#body').css('padding-right','-17px');
+            	  	      	        	mostrarMensaje('success','Se realizo con exito el Proceso');
+            	  			    	}else{
+            	  			    		mostrarMensaje('error','No se realizo con exito el Proceso');
+            	  			    	}
+            	  			    	$('.modal').modal('hide');
+            	  			    	$('#body').css('padding-right','-17px');
+            	  			    	$('#formularioModificar')[0].reset();
+        	  			    		$form.data('formValidation').resetForm();
+            	  		    });
+            	  		});
+                       
+                        $('#formularioEliminar,#formularioHabilitar').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status){
+                      	            $form.data('formValidation').resetForm();
+                      	            $('#formularioEliminar')[0].reset();
+                      	          	$('#formularioHabilitar')[0].reset();
+                      	        	$('#example').dataTable().fnDraw('page');
+									$('#body').css('padding-right','-17px');
+                      	        	mostrarMensaje('success','Se realizo con exito el Proceso');
+                      	        }else{
+                              		mostrarmensaje('error','No se realizo con exito el Proceso');
+                              	}
+                            	$('.modal').modal('hide');
+                            	$('#body').css('padding-right','-17px');
+                      	    }, 'json');
+                          });
+    						
+                        	$('#btnAdicionarTelefono').click(function(){
+                        		var row = $('<tr></tr>');
+                        		$('<td></td>').html('<input  type="text" id="telefonos" name="telefonos" placeholder="ingrese telefono" class="form-control input-md" data-fv-greaterthan="true" data-fv-greaterthan-value="100000" data-fv-integer="true" data-fv-notempty="true"/>').appendTo(row);
+                        		$('<td class="remove-row "></td>').html('<span class="glyphicon glyphicon-trash btn btn-danger btn-circle"></span>').appendTo(row);
+                        		$('.tablaTelefonos > tbody:last').append(row);
+                        	});
+                        	$('#btnAdicionarTelefono2').click(function(){
+                        		var row = $('<tr></tr>');
+                        		$('<td></td>').html('<input  type="text" id="telefonos2" name="telefonos2" placeholder="ingrese telefono" class="form-control input-md" data-fv-greaterthan="true" data-fv-greaterthan-value="100000" data-fv-integer="true" data-fv-notempty="true"/>').appendTo(row);
+                        		$('<td class="remove-row "></td>').html('<span class="glyphicon glyphicon-trash btn btn-danger btn-circle"></span>').appendTo(row);
+                        		$('.tablaTelefonos2 > tbody:last').append(row);
+                        	});
+                        	$(document).on('click', '.remove-row', function(){ 
+                        		var tr = $(this).closest('tr');
+                        	    tr.fadeOut(300, function(){
+                        	    	tr.remove();
+                        		});
+                        	});
+                        });
+                        </script>
+                

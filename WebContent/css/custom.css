@@ -1,0 +1,27 @@
+/**
+ *
+ * Apply Here your Custom CSS
+ *
+*/
+.tenis{
+		padding-top: 70px;
+        background-color: rgb(48,54,65);
+}
+.neoncolor {
+  background-color: rgb(48,54,65);
+}
+.modal-title{
+	font-weight:bold;font-variant:small-caps;color:#ffffff;letter-spacing:1pt;word-spacing:-1pt;font-size:15px;text-align:center;line-height:1;
+}
+.titulo-gestion{
+font-weight:bold;font-variant:small-caps;color:#000000;letter-spacing:1pt;word-spacing:-1pt;font-size:22px;text-align:left;font-family:georgia, serif;line-height:1;
+}
+.titulo-login{
+font-weight:bold;font-variant:small-caps;color:#ffffff;letter-spacing:1pt;word-spacing:-1pt;font-size:22px;text-align:center;font-family:georgia, serif;line-height:1;
+}
+.titulo-entrega{
+font-weight:bold;font-variant:small-caps;color:#000000;letter-spacing:1pt;word-spacing:-1pt;font-size:15px;text-align:left;font-family:georgia, serif;line-height:1;
+}
+
+table {border-collapse: collapse;}
+td    {padding: 0px;}

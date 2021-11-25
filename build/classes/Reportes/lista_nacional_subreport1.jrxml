@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_nacional_subreport1" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6c217a35-4611-440e-843d-5a46ee1eaca2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codnac" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select concat(nomper,' ',priapper,' ',segapper)jugador,categoria.nomcat categoria,posicion from detallenacional join jugador on jugador.codjug=detallenacional.codjug join categoria on categoria.codcat=detallenacional.codcat join persona on persona.codper=jugador.codper where detallenacional.codnac=$P{codnac}]]>
+	</queryString>
+	<field name="jugador" class="java.lang.String"/>
+	<field name="categoria" class="java.lang.String"/>
+	<field name="posicion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[pocision en que concluyo el nacional]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="284" y="0" width="100" height="20" uuid="31b2a148-a267-4219-a32e-f36e2a655ae2"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Posicion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="4" y="0" width="180" height="20" uuid="58bd862a-0318-44bf-9feb-6c172c97255f"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre Completo de Jugador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="184" y="0" width="100" height="20" uuid="389a32fd-1255-4988-96dd-2f80fc6effbb"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Categoria]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="184" y="1" width="100" height="20" uuid="568b511e-fb46-42e7-af36-0e21d785c39f"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{categoria}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="4" y="0" width="180" height="20" uuid="ab036afa-a6aa-4ede-8488-84937d5aac4e"/>
+				<textFieldExpression><![CDATA[$F{jugador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="284" y="0" width="100" height="20" uuid="6dd8e27d-444e-4b32-937b-45e5e2d0c5e0"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{posicion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

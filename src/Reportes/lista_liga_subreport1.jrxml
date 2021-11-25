@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="lista_liga_subreport1" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b2f03a1e-3653-40c2-9b80-1f6e3639ae5a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codlig" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select detalleliga.total,concat(nomper,' ',priapper,' ',segapper) as jugador,nompro from detalleliga
+join jugadores on jugadores.codjug=detalleliga.codjug
+join personas on personas.codper=jugadores.codper
+join provincias on provincias.codpro=jugadores.codpro
+where codlig=$P{codlig} and categoria='1' order by total]]>
+	</queryString>
+	<field name="total" class="java.lang.Float">
+		<fieldDescription><![CDATA[total de puntaje de la liga]]></fieldDescription>
+	</field>
+	<field name="jugador" class="java.lang.String"/>
+	<field name="nompro" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre de proceso]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="574" height="20" isPrintInFirstWholeBand="true" uuid="186a1280-66c8-45fa-b682-4cdbee8c5a85"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ CATEGORIA "A"]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="17" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="326" height="17" isPrintInFirstWholeBand="true" uuid="a5719bfe-ffec-4576-b1cf-d30ab2cacf32"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JUGADOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="0" width="103" height="17" isPrintInFirstWholeBand="true" uuid="31c83897-0eda-4dd1-9660-884379a6eb08"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="326" y="0" width="145" height="17" isPrintInFirstWholeBand="true" uuid="21f46b3f-b68b-4c15-bbb5-0296da5ec40c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROVINCIA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="471" y="0" width="103" height="15" uuid="2f283d14-2d8f-43b1-94a0-28ec0ac8d150"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="326" height="15" uuid="8f689092-9807-4509-b095-a2142970bca8"/>
+				<textFieldExpression><![CDATA[$F{jugador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="0" width="145" height="15" uuid="1d30bffb-4d73-4ade-bd34-6b747789da42"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nompro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

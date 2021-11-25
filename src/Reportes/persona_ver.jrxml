@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="persona_ver" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5f4de3d8-194e-4cd8-b23d-18daf53efbb9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="codper" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select ciper,concat(nomper,' ',priapper,' ',segapper) persona,to_char(fecnacper,'dd/MM/yyyy') fecha,dirper,telper from persona where codper=$P{codper}]]>
+	</queryString>
+	<field name="ciper" class="java.lang.String">
+		<fieldDescription><![CDATA[cedula de indentidad de la persona]]></fieldDescription>
+	</field>
+	<field name="persona" class="java.lang.String"/>
+	<field name="fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[fecha en que se jugo el nacional]]></fieldDescription>
+	</field>
+	<field name="dirper" class="java.lang.String">
+		<fieldDescription><![CDATA[direccion de la persona]]></fieldDescription>
+	</field>
+	<field name="telper" class="java.lang.String">
+		<fieldDescription><![CDATA[numero de telefono de la persona]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="56" y="20" width="210" height="42" uuid="2e6a38ed-0cb0-47c3-a135-4e07a14edd11"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ver Persona ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="247" splitType="Stretch">
+			<textField>
+				<reportElement x="266" y="19" width="100" height="20" uuid="b36559c9-0dbc-472f-be57-10c514c64c07"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ciper}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="266" y="62" width="250" height="20" uuid="edc3f756-65cd-4a6e-812f-be1552c9f660"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{persona}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="107" width="100" height="20" uuid="b5821807-f3f5-4ac4-a006-03bf25f8e704"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="153" width="251" height="20" uuid="8b41971e-47fd-473c-a5f4-b9e4e9d22ac3"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dirper}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="265" y="201" width="100" height="20" uuid="71c69760-be08-46dc-bdf8-509747906a4a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{telper}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="56" y="19" width="127" height="20" uuid="686196c5-c1d7-477a-b375-53772772035d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cedula de Identidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="62" width="127" height="20" uuid="f6ebbed6-eb4d-4e3f-bbf6-b0f30a5793cc"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombres y Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="107" width="127" height="20" uuid="9fbd4c06-6fcc-4ec0-863f-8425d4f9e438"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de Nacimiento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="153" width="100" height="20" uuid="e79d47e8-48af-40a8-8bda-01693f29e9e3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Direccion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="201" width="100" height="20" uuid="adae87b2-ddf1-45b2-bc13-34b721ecadf2"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Telefono]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,230 @@
+
+<div class="row">
+	<div class="col-lg-12">
+		<div class="panel" >
+			<div class="panel-heading"><h2 class="page-header" align="center">Partidos</h2>
+			<div class="row">
+				<div class="col-xs-3">
+					
+				</div>
+				<div class="col-xs-3">
+					<button class="btn btn-info" id="torneo_final" data-tor="$torneo">Finalizar</button>
+				</div>
+				<div class="col-xs-6">
+					<button class="btn btn-danger" id="torneo_volver">Ir Torneos</button>
+					<button class="btn btn-danger" id="fase_volver" data-id="$torneo">Ir Fases</button>
+					<button class="btn btn-danger" id="grupo_volver" data-id="$torneo" data-fase="$fase" >Ir Grupos</button>
+				</div>
+			</div>
+				<div class="row">
+					#foreach($p in $partidos)
+						<table class="table table-condensed">
+							<thead>
+								<tr>
+									<th width="5%" style="text-align: center;">Foto</th>
+									<th width="25%">Jugadores -- Partido de Ronda: $p.ronpar</th>
+									#foreach($s in $set)
+										#if($s.codpar ==$p.codpar && $s.codtor==$p.codtor && $s.codgru==$p.codgru && $s.codfase==$p.codfas)
+										<th width="4%" style="text-align: center;">$s.codset</th>
+										#end
+									#end
+									#if($p.cant<5)
+									<th width="5%"><button class="btn btn-success btn-xs" id="añadirset" data-tor="$p.codtor" data-fas="$p.codfas" data-gru="$p.codgru" data-par="$p.codpar" data-can="$p.cant">Añadir</button></th>
+									#end
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td align="center"><img class="img-thumbnail" width="40px" src="../../fotos/$p.fotjuga" /></td>
+									<td>$p.jugador_a</td>
+									#foreach($s in $set)
+										#if($s.codpar ==$p.codpar && $s.codtor==$p.codtor && $s.codgru==$p.codgru && $s.codfase==$p.codfas)
+										<td align="center"><input class="ptsa" value="$s.ptsa" style="width: 80%;text-align: center;" data-set="$s.codset" data-tor="$s.codtor" data-fas="$s.codfase" data-gru="$s.codgru" data-par="$s.codpar"></td>
+										#end
+									#end
+								</tr>
+								<tr>
+									<td align="center"><img class="img-thumbnail" width="40px" src="../../fotos/$p.fotjugb" /></td>
+									<td>$p.jugador_b</td>
+									#foreach($s in $set)
+										#if($s.codpar ==$p.codpar && $s.codtor==$p.codtor && $s.codgru==$p.codgru && $s.codfase==$p.codfas)
+										<td align="center"><input class="ptsb" value="$s.ptsb" style="width: 80%;text-align: center;" data-set="$s.codset" data-tor="$s.codtor" data-fas="$s.codfase" data-gru="$s.codgru" data-par="$s.codpar"></td>
+										#end
+									#end
+								</tr>
+							</tbody>
+						</table>
+					#end
+					
+					<input type="hidden" id="fase" value="$fase">
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div> 
+                        <script type="text/javascript">
+                        $(document).ready(function() {
+                        	$('#btnAdicionar').click(function(){
+                        		$('#formulario').data('formValidation').resetForm();
+                        		$('#formulario')[0].reset();
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionar').modal('show');
+                        	});
+                        	$('#torneo_final').click(function(){ 
+                      			//ir_pagina('../liga/fase?codc='+$(this).data('id'));
+                      			$.post('../liga/finall?codtor='+$(this).data('tor'), function(resp) {
+                        			console.log(resp);
+                      				$("#contenedor").html(resp);
+                    	    	});
+                      		});
+                        	$('#torneo_volver').click(function(){ 
+                      			//ir_pagina('../liga/fase?codc='+$(this).data('id'));
+                      			$.post('../liga/gestion', function(resp) {
+                        			$("#contenedor").html(resp);
+                    	    	});
+                      		});
+                        	$('#fase_volver').click(function(){ 
+                      			//ir_pagina('../liga/fase?codc='+$(this).data('id'));
+                      			$.post('../liga/fase?codtor='+$(this).data('id')+'&estado=1', function(resp) {
+                        			$("#contenedor").html(resp);
+                    	    	});
+                      		});
+                        	$('#grupo_volver').click(function(){ 
+                      			//ir_pagina('../liga/fase?codc='+$(this).data('id'));
+                      			$.post('../liga/grupo?codfas='+$(this).data('fase')+'&codtor='+$(this).data('id'), function(resp) {
+                        			$("#contenedor").html(resp);
+                    	    	});
+                      		});
+                        	$('#añadirset').click(function(){
+                        		$.post('../liga/set?codpar='+$(this).data('par')+'&codgru='+$(this).data('gru')+'&codfas='+$(this).data('fas')+'&codtor='+$(this).data('tor')+'&can='+$(this).data('can'), function(result) {
+              		            	if(result.status){
+              		            		$.post('../liga/partido?codgru='+$('#añadirset').data('gru')+'&codfas='+$('#añadirset').data('fas')+'&codtor='+$('#añadirset').data('tor'), function(resp) {
+                                			$("#contenedor").html(resp);
+                            	    	});
+              		            	}else{
+              		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+              		            	}
+              			        });
+                        	});
+                        	$('.ptsa').blur(function(){
+                            	$.post('../liga/setmod?codpar='+$(this).data('par')+'&codgru='+$(this).data('gru')+'&codfas='+$(this).data('fas')+'&codtor='+$(this).data('tor')+'&ptsa='+$(this).val()+'&codset='+$(this).data('set'),function(resp){
+                            		if(resp.status==true){
+                      					mostrarMensaje('success','Se realizo con exito el Proceso');
+                      				}else{
+              		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+              		            	}
+                      			});
+                      		});
+                        	$('.ptsb').blur(function(){
+                          	  $.post('../liga/setmodi?codpar='+$(this).data('par')+'&codgru='+$(this).data('gru')+'&codfas='+$(this).data('fas')+'&codtor='+$(this).data('tor')+'&ptsb='+$(this).val()+'&codset='+$(this).data('set'),function(resp){
+                          		  if(resp.status==true){
+                    					mostrarMensaje('success','Se realizo con exito el Proceso');
+                    				}else{
+              		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+              		            	}
+                    			});
+                    		});
+                        	var grupo=['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                        	$('#fector1').datetimepicker({
+                          		 format: 'DD/MM/YYYY'
+                               });
+                        	$('#btnAdicionarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalAdicionarConfirmacion').modal('show');
+                        	});
+                        	$('#btnModificarConfirmacion').click(function(){
+                        		document.getElementById("body").removeAttribute("style");
+                        		$('#modalModificarConfirmacion').modal('show');
+                        	});
+                        	$('#example').dataTable( {
+                        		"dom":"<button> ip",
+                        		"oLanguage": {
+                                    "sUrl": "../../js/Spanish.lang"
+                                },
+                      			"processing": true,
+                      		    "serverSide": true,
+                      		    "ajax": {
+                      		    	"type": "POST",
+                      	            "url": "../liga/listarg",
+                      	        	"data": function ( d ) {
+                      	                d.codfas = $('#fase').val();
+                      	            }
+                              	},
+                      		    "columns": [
+                      		                { "data": "codgru" },
+                      		                { "data": "codgru" }
+                      		                                  		    ],
+                      		    "createdRow": function ( row, data, index ){
+                      		    	$('td',row).eq(0).html(grupo[data.numgru-1]);
+                      		    	if(data.estgru==1){
+                      		    		$('td', row).eq(1).html('<div class="btn-group"><button class="modificar btn btn-info btn-sm"  data-toggle="tooltip" data-placement="top" title="Modificar" data-id="'+data.codgru+'"><i class="entypo-pencil"></i></button><button class="eliminar btn btn-danger btn-sm"  data-toggle="tooltip" data-placement="top" title="Eliminar" data-id="'+data.codgru+'"><i class="entypo-trash"></i></button><button class="iniciar btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="Inciar" data-id="'+data.codgru+'"><i class="entypo-right-dir"></i>Iniciar Torneo</button></div>');
+                      		    	 }else{
+                      		    		 if(data.estgru==2){
+                      						$('td', row).eq(1).html('<button class="habilitar btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="Habilitar" data-id="'+data.codgru+'"><i class="entypo-ccw"></i></button>');
+                      		    		 }else{
+                      		    			$('td', row).eq(1).html('<button class="habilitar btn btn-success btn-sm"  data-toggle="tooltip" data-placement="top" title="Habilitar" data-id="'+data.codgru+'"><i class="entypo-ccw"></i></button>');
+                      		    		 }
+                      				}
+                      	        },
+                      	        "drawCallback": function( settings ) {	
+                              		$('.modificar').click(function(){ 
+                              			$('#formularioModificar').data('formValidation').resetForm();
+                                		$('#formularioModificar')[0].reset();
+                                		document.getElementById("body").removeAttribute("style");
+                                  		$.post('../liga/obtener?codgru='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalModificar').modal('show');
+                      							$('#formularioModificar').loadJSON(result.data);
+                      							$('#fector1').val(result.data.fecha);
+                      							document.getElementById("body").removeAttribute("style");
+                      		            	}else{
+                      		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		$('.eliminar').click(function(){ 
+                              			$('#formularioEliminar').data('formValidation').resetForm();
+                                		$('#formularioEliminar')[0].reset();
+                                  		$.post('../liga/obtener?codgru='+$(this).data('id'), function(result) {
+                      		            	if(result.status){
+                      		            		$('#modalEliminar').modal('show');
+                      							$('#formularioEliminar').loadJSON(result.data);
+                      							$('#ProcesoLabel').html(result.data.nomtor);
+                      		            	}else{
+                      		            		mostrarMensaje('error','No se realizo con exito el Proceso');
+                      		            	}
+                      			        }, 'json');
+                              		});
+                              		
+                              		$('button[data-toggle="tooltip"]').tooltip({animated: 'fade',placement: 'bottom',});
+                              		
+                      	        }
+                        } );
+                        
+                        $('.estado').click(function(){
+                        	$('#example').dataTable().fnDraw('page');
+                        });
+                        
+                        $('#formulario,#formularioModificar,#formularioEliminar,#formularioHabilitar').formValidation(
+                  				{locale: 'es_ES'}).on('success.form.fv', function(e) {
+                              e.preventDefault();
+                              var $form = $(e.target);
+                              $.post($form.attr('action'), $form.serialize(), function(result) {
+                              	if(result.status){
+                      	            $form.data('formValidation').resetForm();
+                      	          	$('#formulario')[0].reset();
+                      	        	$('#formularioModificar')[0].reset();
+                      	            $('#formularioEliminar')[0].reset();
+									$('#example').dataTable().fnDraw('page');
+									$('#body').css('padding-right','-17px');
+									mostrarMensaje('success','Se realizo con exito el Proceso');
+                      	        }else{
+                              		mostrarMensaje('error','No se realizo con exito el Proceso');
+                              	}
+                            	$('.modal').modal('hide');
+                      	    }, 'json');
+                          });
+                        });
+                        </script>
+                
